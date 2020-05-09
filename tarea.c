@@ -63,16 +63,15 @@ int main(){
     if (string==NULL){
       return 1;
     }
-    for (i=0;i<n;i++){
-      //Guardar las palabras en arreglos
-      fgets(palabra,201*sizeof(char),string);
-      strcpy(strings[i],palabra);
+  for (i=0;i<n;i++){
+    //Guardar las palabras en arreglos
+    while (fgets(**strings, 201, *string) != NULL){
     }
-    for(i=0;i<n2;i++){
-      //Guardar prefijos en arreglos
-      fgets(palabra,201,prefijo);
-      strcpy(prefijos[i],palabra);
-    }
+  }
+  for(i=0;i<n2;i++){
+    //Guardar prefijos en arreglos
+    while (fgets(**prefijos, 201, *prefijo) != NULL)
+  }
     fclose(string);fclose(prefijo);
     for (int i = 0; i < n2; i++){
       char **pal= buscar_str(strings, n, prefijos[i]);
