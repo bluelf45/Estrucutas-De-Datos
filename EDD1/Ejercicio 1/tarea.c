@@ -1,4 +1,3 @@
-
 #include<stdio.h>
 #include<stdlib.h>
 #include <string.h>
@@ -30,44 +29,53 @@ char ** buscar_str(char **strings, int largo,char *prefijo,int *cuenta)
 }
 
 void agregar(char **palabras, char *name,int largo){
-  int i;
+  int i=0;
   strtok(name, "\n");
-  strcat(name,".txt");
+  strcat(name,".out");
+  printf("Archivo\n");
+  for(int j=0;j<largo;j++){
+    printf("%s",palabras[j]);
+  }
+  printf("\n");
   FILE *prefijo;
   prefijo=fopen(name, "w");
-  printf("hola\n");
   while(i<largo){
-    strcat(palabras[i],"\n");
-    printf("%s",palabras[i]);
-    fprintf(prefijo, palabras[i]);
+    fprintf(prefijo, "%s", palabras[i]);
     i++;
   }
   fclose(prefijo);
+}
+int CuentaLinea(char* archivo){
+  FILE *fp=fopen(archivo,"r");
+  if (fp==NULL){exit(1);}
+  int lineas=0;
+  int c;
+  while((c=fgetc(fp))!=EOF){
+    if(c=='\n'){
+      lineas++;
+    }
+  }
+  fclose(fp);
+  return lineas;
 }
 
 int main()
 {
   int largo;
   int n,i,n2;
-  printf("Maximo cantidad de palabras: ");
-  scanf("%d",&n);
-  printf("Maximo cantidad de prefijos: ");
-  scanf("%d",&n2);
-  char archivo1[21],archivo2[21];
-  char **strings=(char **)malloc(n*sizeof(char *));
-  char **prefijos=(char **)malloc(n2*sizeof(char *));
-  printf("Nombre del archivo con palabras: ");
-  scanf("%s",archivo1);
-  printf("Nombre del archivo con prefijos: ");
-  scanf("%s",archivo2);
-  FILE *string=fopen(archivo1,"r");
-  FILE *prefijo=fopen(archivo2,"r");
+  n=CuentaLinea("S.txt");
+  n2=CuentaLinea("P.txt");
+  printf("%d %d\n",n,n2);
+  FILE *string=fopen("S.txt","r");
+  FILE *prefijo=fopen("P.txt","r");
   if (prefijo==NULL){
     return 1;
   }
   if (string==NULL){
     return 1;
   }
+  char **strings=(char **)malloc(n*sizeof(char *));
+  char **prefijos=(char **)malloc(n2*sizeof(char *));
   for (i=0;i<n;i++){
     //Guardar las palabras en arreglos
     strings[i]=(char *)malloc(201*sizeof(char));
