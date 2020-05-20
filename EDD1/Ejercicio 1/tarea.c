@@ -4,6 +4,7 @@
 //busca prefijos
 int prefijador(char *palabra, char *prefijo)
 //Compara 2 strings hasta el largo del 2do
+//Los inputs de la funcion son 2 strings
 {
   if (strncmp(palabra,prefijo,strlen(prefijo)-1)==0){
     return 0;
@@ -11,9 +12,11 @@ int prefijador(char *palabra, char *prefijo)
   else{
     return 1;
   }
-  //retorna 0 si es prefijo, 1 si no lo es
+  //retorna 0 si es prefijo, 1 si no es prefijo
 }
 char ** buscar_str(char **strings, int largo,char *prefijo,int *cuenta)
+//funcion busca todos los strings que sean prefijos del string prefijo
+//inputs son :arreglo de strings, el largo del arreglo strings, el prefijo que quieres usar,
 {
   int contador=0;
   char **palabras=(char **)malloc(largo*sizeof(char *));
@@ -26,8 +29,9 @@ char ** buscar_str(char **strings, int largo,char *prefijo,int *cuenta)
   }
   *cuenta=contador;
   return palabras;
+  //retorna el arreglo de palabras que son prefijos de prefijo
 }
-
+//basti comenta esta
 void agregar(char **palabras, char *name,int largo){
   int i=0;
   strtok(name, "\n");
