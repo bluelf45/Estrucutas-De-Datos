@@ -10,7 +10,7 @@ clienteBanco* leerTrans(char* transacciones, clienteBanco* finalCuentas, int tot
 
     fp = fopen(transacciones, "r+");
     if (fp==NULL){
-        printf("Error al abrir archivo")
+        printf("Error al abrir archivo");
     }
     while (fread(&temp, sizeof(char),1,fp)!= EOF){
         if (temp=="+"){
@@ -50,7 +50,7 @@ int contarlineas(char *file){
     int cont=0;
     fp=fopen(file,"rb");
     if (fp==NULL){
-        printf("Error al abrir archivo")
+        printf("Error al abrir archivo");
     }
     while (fread(&cliente,sizeof(clienteBanco),1,fp)!=0){
         cont++;
@@ -62,7 +62,7 @@ clienteBanco *Cuentas(char *fname, int n){
     int i=0;
     FILE *fp=fopen(fname,"rb");
     if (fp==NULL){
-        printf("Error al abrir archivo")
+        printf("Error al abrir archivo");
     }
     clienteBanco clientes=(clienteBanco)malloc(sizeof(clienteBanco)*n);
     while (1){
@@ -84,7 +84,7 @@ void actualizarSaldos(char *clientes, char *transacciones){
     FILE *fp;
     fp= fopen(clientes,"w");
     if (fp==NULL){
-        printf("Error al abrir archivo")
+        printf("Error al abrir archivo");
     }
     fwrite(cuentasClientes, clienteBanco,n, fp);
 }
@@ -98,7 +98,7 @@ typedef struct {
 
 int main(char* clientes, char* transacciones){
     if (clientes == NULL || transacciones== NULL){
-        printf("Inserte los nombres correctos para los archivos")
+        printf("Inserte los nombres correctos para los archivos");
     }
     actualizarSaldos(char* clientes, char* transacciones);
     return 0;
