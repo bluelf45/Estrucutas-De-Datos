@@ -3,6 +3,13 @@
 #include <math.h>
 #include <string.h>
 
+typedef struct {
+    int nroCuenta;
+    int saldo;
+    char nbre[51];
+    char direccion[51];
+} clienteBanco;
+
 clienteBanco* leerTrans(char* transacciones, clienteBanco* finalCuentas, int totalClientes){
     FILE *fp;
     int tam,c1,c2,dinero;
@@ -13,33 +20,33 @@ clienteBanco* leerTrans(char* transacciones, clienteBanco* finalCuentas, int tot
         printf("Error al abrir archivo");
     }
     while (fread(&temp, sizeof(char),1,fp)!= EOF){
-        if (temp=="+"){
+        if (strcmp(&temp,"+")==0){
             fscanf(fp, "%c %d %d",signo, c1, dinero);
             for (int i = 0; i < totalClientes; i++){
-                if (finalCuentas[i].nrocuenta==c1){
+                if (finalCuentas[i].nroCuenta==c1){
                     finalCuentas[i].saldo= finalCuentas[i].saldo + dinero;
                 }
-            }     
+            }
         }
-        if (temp=="-"){
+        if (strcmp(&temp,"-")==0){
             fscanf(fp, "%c %d %d",signo, c1, dinero);
             for (int i = 0; i < totalClientes; i++){
-                if (finalCuentas[i].nrocuenta==c1){
+                if (finalCuentas[i].nroCuenta==c1){
                     finalCuentas[i].saldo= finalCuentas[i].saldo - dinero;
                 }
             }
         }
-        if (temp==">"){
+        if (strcmp(&temp,">")==0){
             fscanf(fp, "%c %d %d %d",signo, c1, c2, dinero);
             for (int i = 0; i < totalClientes; i++){
-                if (finalCuentas[i].nrocuenta==c1){
+                if (finalCuentas[i].nroCuenta==c1){
                     finalCuentas[i].saldo= finalCuentas[i].saldo - dinero;
                 }
-                if (finalCuentas[i].nrocuenta==c2){
+                if (finalCuentas[i].nroCuenta==c2){
                     finalCuentas[i].saldo= finalCuentas[i].saldo + dinero;
                 }
             }
-            
+
         }
     }
     return finalCuentas;
@@ -52,6 +59,7 @@ int contarlineas(char *file){
     if (fp==NULL){
         printf("Error al abrir archivo");
     }
+    clienteBanco cliente;
     while (fread(&cliente,sizeof(clienteBanco),1,fp)!=0){
         cont++;
   }
@@ -64,10 +72,10 @@ clienteBanco *Cuentas(char *fname, int n){
     if (fp==NULL){
         printf("Error al abrir archivo");
     }
-    clienteBanco clientes=(clienteBanco)malloc(sizeof(clienteBanco)*n);
+    clienteBanco *clientes=(clienteBanco*)malloc(sizeof(clienteBanco)*n);
+    clienteBanco cliente;
     while (1){
         clientes[i]=cliente;
-        clienteBanco cliente=(clienteBanco)malloc(sizeof(clienteBanco));
         if (fread(&cliente,sizeof(clienteBanco),1,fp)==0){
             break;
     }
@@ -79,27 +87,18 @@ clienteBanco *Cuentas(char *fname, int n){
 
 void actualizarSaldos(char *clientes, char *transacciones){
     int n =contarlineas(clientes);
-    clienteBanco *cuentasClientes= Cuentas(clientes);
+    clienteBanco *cuentasClientes= Cuentas(clientes,n);
     cuentasClientes=leerTrans(transacciones,cuentasClientes,n);
     FILE *fp;
     fp= fopen(clientes,"w");
     if (fp==NULL){
         printf("Error al abrir archivo");
     }
-    fwrite(cuentasClientes, clienteBanco,n, fp);
+    fwrite(cuentasClientes, sizeof(clienteBanco), n, fp);
 }
 
-typedef struct {
-    int nroCuenta; 
-    int saldo; 
-    char nbre[51]; 
-    char direccion[51]; 
-} clienteBanco; 
 
-int main(char* clientes, char* transacciones){
-    if (clientes == NULL || transacciones== NULL){
-        printf("Inserte los nombres correctos para los archivos");
-    }
-    actualizarSaldos(char* clientes, char* transacciones);
+int main(int argc, char **argv){
+    actualizarSaldos(argv[1], argv[2]);
     return 0;
 }
