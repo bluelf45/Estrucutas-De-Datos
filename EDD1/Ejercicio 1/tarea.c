@@ -26,15 +26,19 @@ int prefijador(char *palabra, char *prefijo)
 }
 
 /***** 
-* TipoFunción NombreFunción 
+* char** buscar_str
 ****** 
 * Resumen Función 
 ****** 
 * Input: 
   * tipoParámetro NombreParámetro : Descripción Parámetro 
+  * char** strings : arreglo de strings que quieres saber si tiene cierto prefijo
+  * int largo : cantidad de palabras de strings, o tambien la cantidad de lineas
+  * char* prefijo : el string que va a ser el prefijo que quieres usar
+  * int* cuenta: cuenta va a ser la cantidad de prefios que hay en el arreglo strings
   * ....... ****** 
 * Returns: 
-  * TipoRetorno, Descripción retorno 
+  * char** palabras, retorna un arreglo de palabras que tienen de prefijo a la variable prefijo
 *****/ 
 char ** buscar_str(char **strings, int largo,char *prefijo,int *cuenta)
 {
@@ -81,15 +85,16 @@ void agregar(char **palabras, char *name,int largo){
 }
 
 /***** 
-* TipoFunción NombreFunción 
+* int CuentaLinea
 ****** 
-* Resumen Función 
+* cuenta la cantidad de \n que hay, el cual va a ser la cantidad de lineas que existan
 ****** 
 * Input: 
   * tipoParámetro NombreParámetro : Descripción Parámetro 
+  * char* archivo: nombre del archivo al que le quieres contar  las lineas
   * ....... ****** 
 * Returns: 
-  * TipoRetorno, Descripción retorno 
+  * int lineas, cantidad entera que corresponde a la cantidad de lineas del archivo
 *****/ 
 int CuentaLinea(char* archivo){
   FILE *fp=fopen(archivo,"r");
