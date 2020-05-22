@@ -19,6 +19,7 @@ typedef struct {
   * char* transacciones: Nombre del archivo ASCII transacciones
   * clienteBanco* finalCuentas: array de structs copiados del archivo clientes
   * int totalClientes: Cantidad total de clientes, es decir la cantidad de structs que tiene el array anteriormente mencionado
+******
 * Returns: 
   * clienteBanco*, Es el array de structs que se le entrega a la funcion solo que ahora con el saldo ya modificado. 
 *****/ 
