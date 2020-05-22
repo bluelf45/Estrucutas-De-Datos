@@ -13,7 +13,8 @@ typedef struct {
 /***** 
 * clienteBanco* leerTrans
 ****** 
-* La funcion se encarga de leer el primer caracter de cada linea del archivo transacciones, y asi modifica los saldos en finalCuentas dependiendo en lo que diga la linea de el archivo transacciones
+* La funcion se encarga de leer el primer caracter de cada linea del archivo transacciones,y asi modifica
+  los saldos en finalCuentas dependiendo en lo que diga la linea de el archivo transacciones
 ****** 
 * Input: 
   * char* transacciones: Nombre del archivo ASCII transacciones
@@ -93,7 +94,8 @@ int contarlineas(char *file){
 /***** 
 * clienteBanco Cuentas 
 ****** 
-* crea un arreglo de memoria dinamica llamado clientes, al cual se le agregaran todos las cuentas que esten en el archivo binario
+* crea un arreglo de memoria dinamica llamado clientes, al cual se le agregaran todos las cuentas
+  que esten en el archivo binario
 ****** 
 * Input: 
   * char* fname: nombre de archivo binario que tiene structs de tipo cuentaBanco
