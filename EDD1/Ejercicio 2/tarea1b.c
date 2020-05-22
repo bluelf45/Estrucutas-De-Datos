@@ -11,15 +11,16 @@ typedef struct {
 } clienteBanco;
 
 /***** 
-* TipoFunción NombreFunción 
+* clienteBanco* leerTrans
 ****** 
-* Resumen Función 
+* La funcion se encarga de leer el primer caracter de cada linea del archivo transacciones, y asi modifica los saldos en finalCuentas dependiendo en lo que diga la linea de el archivo transacciones
 ****** 
 * Input: 
-  * tipoParámetro NombreParámetro : Descripción Parámetro 
-  * ....... ****** 
+  * char* transacciones: Nombre del archivo ASCII transacciones
+  * clienteBanco* finalCuentas: array de structs copiados del archivo clientes
+  * int totalClientes: Cantidad total de clientes, es decir la cantidad de structs que tiene el array anteriormente mencionado
 * Returns: 
-  * TipoRetorno, Descripción retorno 
+  * clienteBanco*, Es el array de structs que se le entrega a la funcion solo que ahora con el saldo ya modificado. 
 *****/ 
 clienteBanco* leerTrans(char* transacciones, clienteBanco* finalCuentas, int totalClientes){
     FILE *fp;
@@ -120,15 +121,15 @@ clienteBanco *Cuentas(char *fname, int n){
 }
 
 /***** 
-* TipoFunción NombreFunción 
+* void actualizarSaldos
 ****** 
-* Resumen Función 
+* Usa las funciones anteriormente definidas y luego escribe el archivo clientes con los nuevos datos
 ****** 
 * Input: 
-  * tipoParámetro NombreParámetro : Descripción Parámetro 
-  * ....... ****** 
+  * char *clientes: Nombre del archivo binario con la informacion de los clientes
+  * char *transacciones: Nombre del archivo ASCII con la informacion sobre las transacciones
 * Returns: 
-  * TipoRetorno, Descripción retorno 
+  * void, no retorna nada ya que modifica los archivos dados.
 *****/ 
 void actualizarSaldos(char *clientes, char *transacciones){
     int n =contarlineas(clientes);
@@ -142,7 +143,17 @@ void actualizarSaldos(char *clientes, char *transacciones){
     fwrite(cuentasClientes, sizeof(clienteBanco), n, fp);
 }
 
-
+/***** 
+* int main
+****** 
+* Toma los datos de la linea de comandos y usa la funcion actualizarSaldos 
+****** 
+* Input: 
+  * int argc: Cantidad de datos en la linea de comandos
+  * char **argv: Datos entregados en la linea de comandos
+* Returns: 
+  * int, retorna 0 para que el sistema sepa que se ejecuto correctamente el programa.
+*****/ 
 int main(int argc, char **argv){
     actualizarSaldos(argv[1], argv[2]);
     return 0;
