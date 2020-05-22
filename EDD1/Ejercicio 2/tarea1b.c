@@ -71,7 +71,7 @@ clienteBanco* leerTrans(char* transacciones, clienteBanco* finalCuentas, int tot
 ****** 
 * Input: 
   * char * file : Nombre de un archivo binario 
-  * ....... ****** 
+****** 
 * Returns: 
   * int cont, exit(1) si no se abre el archivo, o no existe. O sino devolvera la cantidad de lineas
 *****/ 
@@ -97,7 +97,7 @@ int contarlineas(char *file){
 * Input: 
   * char* fname: nombre de archivo binario que tiene structs de tipo cuentaBanco
   * int n : es la cantidad de lineas del archivo binario
-  * ....... ****** 
+****** 
 * Returns: 
   * TipoRetorno, Descripción retorno 
   * ClienteBanco* : Arreglo de clienteBanco que contiene el total de cuentas en el archivo binario
@@ -129,6 +129,7 @@ clienteBanco *Cuentas(char *fname, int n){
 * Input: 
   * char *clientes: Nombre del archivo binario con la informacion de los clientes
   * char *transacciones: Nombre del archivo ASCII con la informacion sobre las transacciones
+******
 * Returns: 
   * void, no retorna nada ya que modifica los archivos dados.
 *****/ 
@@ -152,6 +153,7 @@ void actualizarSaldos(char *clientes, char *transacciones){
 * Input: 
   * int argc: Cantidad de datos en la linea de comandos
   * char **argv: Datos entregados en la linea de comandos
+******
 * Returns: 
   * int, retorna 0 para que el sistema sepa que se ejecuto correctamente el programa.
 *****/ 
