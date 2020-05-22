@@ -1,10 +1,20 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include <string.h>
-//busca prefijos
+
+/***** 
+* int prefijador 
+****** 
+* La funcion toma 2 char* y comprueba si el segundo es prefijo del primero. 
+****** 
+* Input: 
+  * char* palabra : Palabra la cual queremos comparar con el candidato a prefijo.
+  * char* prefijo : Candidato a prefijo para la palabra.
+  ****** 
+* Returns: 
+  * int, retorna 0 si es prefijo y 1 si no lo es.
+*****/
 int prefijador(char *palabra, char *prefijo)
-//Compara 2 strings hasta el largo del 2do
-//Los inputs de la funcion son 2 strings
 {
   if (strncmp(palabra,prefijo,strlen(prefijo)-1)==0){
     return 0;
@@ -12,11 +22,21 @@ int prefijador(char *palabra, char *prefijo)
   else{
     return 1;
   }
-  //retorna 0 si es prefijo, 1 si no es prefijo
+
 }
+
+/***** 
+* TipoFunción NombreFunción 
+****** 
+* Resumen Función 
+****** 
+* Input: 
+  * tipoParámetro NombreParámetro : Descripción Parámetro 
+  * ....... ****** 
+* Returns: 
+  * TipoRetorno, Descripción retorno 
+*****/ 
 char ** buscar_str(char **strings, int largo,char *prefijo,int *cuenta)
-//funcion busca todos los strings que sean prefijos del string prefijo
-//inputs son :arreglo de strings, el largo del arreglo strings, el prefijo que quieres usar,
 {
   int contador=0;
   char **palabras=(char **)malloc(largo*sizeof(char *));
@@ -29,9 +49,19 @@ char ** buscar_str(char **strings, int largo,char *prefijo,int *cuenta)
   }
   *cuenta=contador;
   return palabras;
-  //retorna el arreglo de palabras que son prefijos de prefijo
 }
-//basti comenta esta
+
+/***** 
+* TipoFunción NombreFunción 
+****** 
+* Resumen Función 
+****** 
+* Input: 
+  * tipoParámetro NombreParámetro : Descripción Parámetro 
+  * ....... ****** 
+* Returns: 
+  * TipoRetorno, Descripción retorno 
+*****/ 
 void agregar(char **palabras, char *name,int largo){
   int i=0;
   strtok(name, "\n");
@@ -49,6 +79,18 @@ void agregar(char **palabras, char *name,int largo){
   }
   fclose(prefijo);
 }
+
+/***** 
+* TipoFunción NombreFunción 
+****** 
+* Resumen Función 
+****** 
+* Input: 
+  * tipoParámetro NombreParámetro : Descripción Parámetro 
+  * ....... ****** 
+* Returns: 
+  * TipoRetorno, Descripción retorno 
+*****/ 
 int CuentaLinea(char* archivo){
   FILE *fp=fopen(archivo,"r");
   if (fp==NULL){exit(1);}
@@ -63,6 +105,17 @@ int CuentaLinea(char* archivo){
   return lineas;
 }
 
+/***** 
+* TipoFunción NombreFunción 
+****** 
+* Resumen Función 
+****** 
+* Input: 
+  * tipoParámetro NombreParámetro : Descripción Parámetro 
+  * ....... ****** 
+* Returns: 
+  * TipoRetorno, Descripción retorno 
+*****/ 
 int main()
 {
   int largo;
