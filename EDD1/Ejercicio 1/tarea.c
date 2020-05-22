@@ -27,7 +27,8 @@ int prefijador(char *palabra, char *prefijo)
 /***** 
 * char** buscar_str
 ****** 
-* Resumen Función 
+* crea un arreglo dinamico de palabras y le va a unir a este arreglo todos los strings que tengan de prefijo a prefijo
+usando la funcion prefijador y asignandole memoria a cada una de las palabras
 ****** 
 * Input: 
   * tipoParámetro NombreParámetro : Descripción Parámetro 
