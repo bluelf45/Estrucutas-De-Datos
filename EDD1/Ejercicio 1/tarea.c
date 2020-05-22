@@ -2,102 +2,71 @@
 #include<stdlib.h>
 #include <string.h>
 //busca prefijos
-int prefijador(char *palabra, char *prefijo)
-//Compara 2 strings hasta el largo del 2do
-//Los inputs de la funcion son 2 strings
-{
-  if (strncmp(palabra,prefijo,strlen(prefijo)-1)==0){
-    return 0;
-  }
-  else{
-    return 1;
-  }
-  //retorna 0 si es prefijo, 1 si no es prefijo
-}
-char ** buscar_str(char **strings, int largo,char *prefijo,int *cuenta)
-//funcion busca todos los strings que sean prefijos del string prefijo
-//inputs son :arreglo de strings, el largo del arreglo strings, el prefijo que quieres usar,
-{
-  int contador=0;
-  char **palabras=(char **)malloc(largo*sizeof(char *));
-  for (int i=0; i<largo; i++){;
-    if (prefijador(strings[i],prefijo)==0){
-      palabras[contador]=(char *)malloc(201*sizeof(char));
-      strcpy(palabras[contador],strings[i]);
-      contador++;
+char ** buscar_str(char **strings, int n, char *p){
+  int i, j; //contadores para los ciclos for
+  char palabra[201];//palabra para hacer los prefijos
+  char *palabras[n];// arreglo de palabras
+  for (i=0;i<n;i++){
+    memset(palabra, 0, sizeof(palabra));//reiniciar palabra a un arreglo vacio
+    for (j=0;j<=strlen(strings[i]);j++)
+    {
+      strncpy(palabra,strings[i],j);//copia el primer caracter de strings[i] a palabra
+      if (strcmp(palabra,p)==0){//ver si la palabra es o no prefijo
+        strcpy(palabras[i],strings[i]);
+        break;//rompe el for de revisar la palabra en especifico
+      }
     }
   }
-  *cuenta=contador;
   return palabras;
-  //retorna el arreglo de palabras que son prefijos de prefijo
 }
-//basti comenta esta
-void agregar(char **palabras, char *name,int largo){
-  int i=0;
-  strtok(name, "\n");
-  strcat(name,".out");
-  printf("Archivo\n");
-  for(int j=0;j<largo;j++){
-    printf("%s",palabras[j]);
-  }
-  printf("\n");
-  FILE *prefijo;
-  prefijo=fopen(name, "w");
-  while(i<largo){
-    fprintf(prefijo, "%s", palabras[i]);
-    i++;
+
+void agregar(char **palabras, char name){
+  FILE prefijo = fopen("%s.dat", name, "w");
+  int cant= ;
+  for ( i = 0; i < cant; i++){
+    fprintf(prefijo, ("%s/n",palabras[i]));
   }
   fclose(prefijo);
 }
-int CuentaLinea(char* archivo){
-  FILE *fp=fopen(archivo,"r");
-  if (fp==NULL){exit(1);}
-  int lineas=0;
-  int c;
-  while((c=fgetc(fp))!=EOF){
-    if(c=='\n'){
-      lineas++;
-    }
-  }
-  fclose(fp);
-  return lineas;
-}
 
-int main()
-{
-  int largo;
+int main(){
   int n,i,n2;
-  n=CuentaLinea("S.txt");
-  n2=CuentaLinea("P.txt");
-  printf("%d %d\n",n,n2);
-  FILE *string=fopen("S.txt","r");
-  FILE *prefijo=fopen("P.txt","r");
+  printf("Maximo cantidad de palabras: ");
+  scanf("%d",&n);
+  printf("Maximo cantidad de prefijos: ");
+  scanf("%d",&n2);
+  char archivo1[21],archivo2[21];
+  char strings[n][201];
+  char prefijos[n2][201];
+  char palabra[201];
+  printf("Nombre del archivo con palabras: ");
+  scanf("%s",archivo1);
+  printf("Nombre del archivo con prefijos: ");
+  scanf("%s",archivo2);
+  FILE *string=fopen(archivo1,"r");
+  FILE *prefijo=fopen(archivo2,"r");
   if (prefijo==NULL){
     return 1;
   }
   if (string==NULL){
     return 1;
   }
-  char **strings=(char **)malloc(n*sizeof(char *));
-  char **prefijos=(char **)malloc(n2*sizeof(char *));
   for (i=0;i<n;i++){
     //Guardar las palabras en arreglos
-    strings[i]=(char *)malloc(201*sizeof(char));
-    fgets(strings[i],201*sizeof(char),string);
+    fgets(palabra,201*sizeof(char),string);
+    strcpy(palabras[i],palabra);
   }
   for(i=0;i<n2;i++){
     //Guardar prefijos en arreglos
-    prefijos[i]=(char *)malloc(201*sizeof(char));
-    fgets(prefijos[i],201*sizeof(char),prefijo);
+    fgets(palabra,201,prefijo);
+    strcpy(prefijos[i],palabra);
   }
-  fclose(string);
-  fclose(prefijo);
+  fclose(string);fclose(prefijo);
   for (int i = 0; i < n2; i++){
-    char **pal= buscar_str(strings, n, prefijos[i],&largo);
-    agregar(pal, prefijos[i], largo);
+    char **pal= buscar_str(strings, n, prefijos[i]);
+    cant = count(pal) 
+    agregar(pal, prefijos[i]);
   }
-  free(strings);
-  free(prefijos);
+  
   return 0;
 }
-
