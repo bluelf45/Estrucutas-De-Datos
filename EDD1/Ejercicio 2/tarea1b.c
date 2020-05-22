@@ -65,15 +65,15 @@ clienteBanco* leerTrans(char* transacciones, clienteBanco* finalCuentas, int tot
 }
 
 /***** 
-* TipoFunción NombreFunción 
+* int contarlineas 
 ****** 
-* Resumen Función 
+* va a leer el archivo binario hasta que fread devuelva el valor 0, o sea, llegue al final del archivo
 ****** 
 * Input: 
-  * tipoParámetro NombreParámetro : Descripción Parámetro 
+  * char * file : Nombre de un archivo binario 
   * ....... ****** 
 * Returns: 
-  * TipoRetorno, Descripción retorno 
+  * int cont, exit(1) si no se abre el archivo, o no existe. O sino devolvera la cantidad de lineas
 *****/ 
 int contarlineas(char *file){
     FILE *fp;
@@ -89,17 +89,18 @@ int contarlineas(char *file){
     fclose(fp);
     return cont;
 }
-
 /***** 
-* TipoFunción NombreFunción 
+* clienteBanco Cuentas 
 ****** 
-* Resumen Función 
+* crea un arreglo de memoria dinamica llamado clientes, al cual se le agregaran todos las cuentas que esten en el archivo binario
 ****** 
 * Input: 
-  * tipoParámetro NombreParámetro : Descripción Parámetro 
+  * char* fname: nombre de archivo binario que tiene structs de tipo cuentaBanco
+  * int n : es la cantidad de lineas del archivo binario
   * ....... ****** 
 * Returns: 
   * TipoRetorno, Descripción retorno 
+  * ClienteBanco* : Arreglo de clienteBanco que contiene el total de cuentas en el archivo binario
 *****/ 
 clienteBanco *Cuentas(char *fname, int n){
     int i=0;
