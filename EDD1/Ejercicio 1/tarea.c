@@ -111,15 +111,14 @@ int CuentaLinea(char* archivo){
 }
 
 /***** 
-* TipoFunción NombreFunción 
+* int main 
 ****** 
-* Resumen Función 
-****** 
-* Input: 
-  * tipoParámetro NombreParámetro : Descripción Parámetro 
-  * ....... ****** 
+* funcion principal que va ausar todas las funciones  que creamos arriba de esta, va a contar lineas de los 2 archivos
+  ver si estos se pueden abrir correctamente,crear arreglos de memoria dinamica para ambos archivos y los va a guardar en estos
+  por ultimo va a usar buscar_str para buscar las palabras y finalmente guardarlos en archivos
+  ****** 
 * Returns: 
-  * TipoRetorno, Descripción retorno 
+  * int 0 : retorna 0 si se cumple correctamente toda la funcion
 *****/ 
 int main()
 {
@@ -127,7 +126,6 @@ int main()
   int n,i,n2;
   n=CuentaLinea("S.txt");
   n2=CuentaLinea("P.txt");
-  printf("%d %d\n",n,n2);
   FILE *string=fopen("S.txt","r");
   FILE *prefijo=fopen("P.txt","r");
   if (prefijo==NULL){
