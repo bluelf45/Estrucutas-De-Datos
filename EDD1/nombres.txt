@@ -1,0 +1,1 @@
+Juan Pablo Cassis Oyanadel, 201973519-5, 200. Trabaje en las funciones prefijador y main en la pregunta 1, y en la pregunta 2 trabaje en la funcion leerTrans y actualizarSaldos
