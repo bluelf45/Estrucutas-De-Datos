@@ -3,74 +3,126 @@
 #include <math.h>
 #include <string.h>
 
+int cont = 0;
+
 typedef struct {
     int nroCuenta;
     int saldo;
     char nbre[51];
     char direccion[51];
 } clienteBanco;
-void transaccion(clienteBanco cliente1, clienteBanco cliente2, int saldo){
-    cliente1->saldo=cliente1->saldo-saldo;
-    cliente2->saldo=cliente2->saldo+saldo;
-}
-void actualizar(clienteBanco cliente,int saldo, int multi){
-    cliente->saldo=cliente->saldo+(saldo*multi);
-}
-void actualizarSaldos(char* transacciones, char* clientes){
-    FILE *fp,*Aclientes;
-    int tam,c1,c2,dinero,pos;
+
+/***** 
+* clienteBanco* leerTrans
+****** 
+* La funcion se encarga de leer el primer caracter de cada linea del archivo transacciones,y asi modifica
+  los saldos en finalCuentas dependiendo en lo que diga la linea de el archivo transacciones. Ademas modifica la variable universal cont, tal que tengamos la cantidad de clientes totales.
+****** 
+* Input: 
+  * char* transacciones: Nombre del archivo ASCII transacciones
+  * clienteBanco* finalCuentas: array de structs copiados del archivo clientes
+******
+* Returns: 
+  * clienteBanco*, Es el array de structs que se le entrega a la funcion solo que ahora con el saldo ya modificado. 
+*****/ 
+clienteBanco* leerTrans(char* transacciones, char* clientes){
+    FILE *fp, *Aclientes;
+    int tam,c1,c2,dinero;
     char temp,signo;
-    int cuenta;
     fp = fopen(transacciones, "r+");
+    Aclientes = fopen(clientes, "r+");
     if (fp==NULL || Aclientes==NULL){
         printf("Error al abrir archivo");
     }
-    clienteBanco cliente, cliente2;
-    while (fread(cliente,sizeof(clienteBanco),1,Aclientes)==0)
-    {
-        while(1)
-        {
-            fread(&temp, sizeof(char),1,fp);
-            if (strcmp(&temp,"+")==0)
-            {
-                fscanf(fp, "%c %d %d",signo, c1, dinero);
-                if(c1==cuenta){
-                    actualizar(cliente, dinero,1);
-                }
-            }
-            else if(strcmp(&temp,"-")==0)
-            {
-                fread(&temp, sizeof(char),1,fp);
-                fscanf(fp, "%c %d %d", signo, c1, dinero);
-                if(c1==cuenta){
-                    actualizar(cliente, dinero,-1);
-                }
-            }
-            else if(strcmp(&temp,">")==0)
-            {
-                fscanf(fp, "%c %d %d %d",signo, c1, c2, dinero);
-                if (c1==cuenta)
-                {
-                    pos=ftell(Aclientes);
-                    fseek(Aclientes,0,SEEK_SET);
-                    while (fread(cliente2,sizeof(clienteBanco),1,Aclientes)==0)
-                    {
-                        if (c2==cliente2->nroCuenta)
-                        {
-                            transaccion(cliente,cliente2,dinero);
-                            break;
-                        }
-                    }
-                    fseek(Aclientes,pos,SEEK_SET);
+    clienteBanco cliente;
+    while (fread(&cliente,sizeof(clienteBanco),1,Aclientes)!=0){
+        if (cont==0){
+            clienteBanco* finalCuentas=(clienteBanco*)malloc(sizeof(clienteBanco));
+            finalCuentas[cont]=cliente;
+            cont++;
+        }
+        else{
+            cont++;
+            finalCuentas=(clienteBanco*)realloc(sizeof(clienteBanco)*cont);
+            finalCuentas[cont]=cliente;
+        }
+    }
+    fseek(fp,0,SEEK_SET);
+    while (fread(&temp, sizeof(char),1,fp)!= EOF){
+        if (strcmp(&temp,"+")==0){
+            fscanf(fp, "%c %d %d",signo, c1, dinero);
+            for (int i = 0; i < totalClientes; i++){
+                if (finalCuentas[i].nroCuenta==c1){
+                    finalCuentas[i].saldo= finalCuentas[i].saldo + dinero;
                 }
             }
         }
+        if (strcmp(&temp,"-")==0){
+            fscanf(fp, "%c %d %d",signo, c1, dinero);
+            for (int i = 0; i < totalClientes; i++){
+                if (finalCuentas[i].nroCuenta==c1){
+                    finalCuentas[i].saldo= finalCuentas[i].saldo - dinero;
+                }
+            }
+        }
+        if (strcmp(&temp,">")==0){
+            fscanf(fp, "%c %d %d %d",signo, c1, c2, dinero);
+            for (int i = 0; i < totalClientes; i++){
+                if (finalCuentas[i].nroCuenta==c1){
+                    finalCuentas[i].saldo= finalCuentas[i].saldo - dinero;
+                }
+                if (finalCuentas[i].nroCuenta==c2){
+                    finalCuentas[i].saldo= finalCuentas[i].saldo + dinero;
+                }
+            }
+
+        }
     }
+    return finalCuentas;
 }
 
+/***** 
+* void actualizarSaldos
+****** 
+* Usa las funciones anteriormente definidas y luego escribe el archivo clientes con los nuevos datos
+****** 
+* Input: 
+  * char *clientes: Nombre del archivo binario con la informacion de los clientes
+  * char *transacciones: Nombre del archivo ASCII con la informacion sobre las transacciones
+******
+* Returns: 
+  * void, no retorna nada ya que modifica los archivos dados.
+*****/ 
+void actualizarSaldos(char *clientes, char *transacciones){
+    clienteBanco *cuentasClientes= Cuentas(clientes,n);
+    cuentasClientes=leerTrans(transacciones,cuentasClientes);
+    FILE *fp;
+    clienteBanco temp;
+    fp= fopen(clientes,"r+");
+    if (fp==NULL){
+        printf("Error al abrir archivo");
+    }
+    for (int i = 0; i < cont; i++){
+        fread(&temp, sizeof(clienteBanco),1,fp);
+        if (temp.saldo != cuentasClientes[i]){
+            fseek(fp, -1*sizeof(clienteBanco), SEEK_CUR);
+            fwrite(cuentasClientes[i],sizeof(clienteBanco),1,fp);
+        }
+    } 
+}
 
-
-
+/***** 
+* int main
+****** 
+* Toma los datos de la linea de comandos y usa la funcion actualizarSaldos 
+****** 
+* Input: 
+  * int argc: Cantidad de datos en la linea de comandos
+  * char **argv: Datos entregados en la linea de comandos
+******
+* Returns: 
+  * int, retorna 0 para que el sistema sepa que se ejecuto correctamente el programa.
+*****/ 
 int main(int argc, char **argv){
     actualizarSaldos(argv[1], argv[2]);
     return 0;
