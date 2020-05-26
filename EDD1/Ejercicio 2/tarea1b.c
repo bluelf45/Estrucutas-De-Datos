@@ -78,6 +78,8 @@ clienteBanco* leerTrans(char* transacciones, char* clientes){
 
         }
     }
+    fclose(fp);
+    fclose(Aclientes);
     return finalCuentas;
 }
 
