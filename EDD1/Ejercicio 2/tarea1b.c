@@ -124,5 +124,6 @@ void actualizarSaldos(char *clientes, char *transacciones){
 *****/
 int main(int argc, char **argv){
     actualizarSaldos(argv[1], argv[2]);
+    printf("El archivo se actualizo correctamente\n")
     return 0;
 }
