@@ -47,7 +47,6 @@ clienteBanco* leerTrans(char* transacciones, char* clientes){
         if (temp=='+'){
             fseek(fp, -1*sizeof(char), SEEK_CUR);
             fscanf(fp, "%c %d %d",&signo, &c1, &dinero);
-            printf("%c %d %d\n",signo,c1,dinero);
             for (int i = 0; i < cont; i++){
                 if (finalCuentas[i].nroCuenta==c1){
                     finalCuentas[i].saldo= finalCuentas[i].saldo + dinero;
@@ -105,7 +104,6 @@ void actualizarSaldos(char *clientes, char *transacciones){
     }
     for (int i = 0; i < cont; i++){
         fread(&temp, sizeof(clienteBanco),1,fp);
-        printf("%d %d\n",temp.saldo,cuentasClientes[i].saldo);
         fseek(fp, -1*sizeof(clienteBanco), SEEK_CUR);
         fwrite(&cuentasClientes[i],sizeof(clienteBanco),1,fp);
     }
