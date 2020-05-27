@@ -1,2 +1,3 @@
 Juan Pablo Cassis Oyanadel, 201973519-5, 200. Trabaje en las funciones prefijador y main en la pregunta 1, y en la pregunta 2 trabaje en la funcion leerTrans y actualizarSaldos
 Oscar Hernan Acevedo Bonvin, 201973567-5, 200. Pregunta1: Hice la funcion buscar_str, trabaje en la funcion main hasta los fclose de los archivos y trabaje en el debug de esta. Pregunta2: trabaje en leerTrans, especificamente en contar la cantidad de structs y en guardar los clientes en arreglos.
+Bastian Tomas Kretschmer Martinez, 201973588-8, 200. Trabaje en el main y en la funcion agregar del ejercicio 1, y en la pregunta 2 ayude a debugear y crear casos de prueba.
