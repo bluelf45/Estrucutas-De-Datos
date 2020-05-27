@@ -36,28 +36,26 @@ clienteBanco* leerTrans(char* transacciones, char* clientes){
     }
     clienteBanco cliente;
     clienteBanco* finalCuentas=(clienteBanco*)malloc(sizeof(clienteBanco));
+
     while (fread(&cliente,sizeof(clienteBanco),1,Aclientes)!=0){
-        if (cont==0){
-            finalCuentas[cont]=cliente;
-            cont++;
-        }
-        else{
-            cont++;
-            finalCuentas=(clienteBanco*)realloc(finalCuentas,sizeof(clienteBanco)*cont);
-            finalCuentas[cont]=cliente;
-        }
+        finalCuentas[cont]=cliente;
+        cont++;
     }
+    fseek(Aclientes,0,SEEK_SET);
     fseek(fp,0,SEEK_SET);
-    while (fread(&temp, sizeof(char),1,fp)!= EOF){
-        if (strcmp(&temp,"+")==0){
+    while (fread(&temp, sizeof(char),1,fp)!=0){
+        if (temp=='+'){
+            fseek(fp, -1*sizeof(char), SEEK_CUR);
             fscanf(fp, "%c %d %d",&signo, &c1, &dinero);
+            printf("%c %d %d\n",signo,c1,dinero);
             for (int i = 0; i < cont; i++){
                 if (finalCuentas[i].nroCuenta==c1){
                     finalCuentas[i].saldo= finalCuentas[i].saldo + dinero;
                 }
             }
         }
-        if (strcmp(&temp,"-")==0){
+        else if (temp=='-'){
+            fseek(fp, -1*sizeof(char), SEEK_CUR);
             fscanf(fp, "%c %d %d",&signo, &c1, &dinero);
             for (int i = 0; i < cont; i++){
                 if (finalCuentas[i].nroCuenta==c1){
@@ -65,7 +63,8 @@ clienteBanco* leerTrans(char* transacciones, char* clientes){
                 }
             }
         }
-        if (strcmp(&temp,">")==0){
+        else if (temp=='>'){
+            fseek(fp, -1*sizeof(char), SEEK_CUR);
             fscanf(fp, "%c %d %d %d",&signo, &c1, &c2, &dinero);
             for (int i = 0; i < cont; i++){
                 if (finalCuentas[i].nroCuenta==c1){
@@ -106,11 +105,11 @@ void actualizarSaldos(char *clientes, char *transacciones){
     }
     for (int i = 0; i < cont; i++){
         fread(&temp, sizeof(clienteBanco),1,fp);
-        if (temp.saldo != cuentasClientes[i].saldo){
-            fseek(fp, -1*sizeof(clienteBanco), SEEK_CUR);
-            fwrite(&cuentasClientes[i],sizeof(clienteBanco),1,fp);
-        }
+        printf("%d %d\n",temp.saldo,cuentasClientes[i].saldo);
+        fseek(fp, -1*sizeof(clienteBanco), SEEK_CUR);
+        fwrite(&cuentasClientes[i],sizeof(clienteBanco),1,fp);
     }
+    fclose(fp);
 }
 
 /*****
