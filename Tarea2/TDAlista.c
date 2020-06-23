@@ -4,11 +4,12 @@
 //lista1 memoria disponible
 //lista2 memoria usada
 
-void initList(tLista* lista){
+void initList(tLista* lista,int tam){
     lista->curr=(tNodo *)malloc(sizeof(tNodo));
     lista->head=lista->curr;
     lista->tail=lista->curr;
-    lista->listSize=0;
+    lista->tail->next=NULL;
+    lista->listSize=tam;
     lista->pos=0;
 }
 int insert(tLista* lista, int item1, int item2){
@@ -31,23 +32,43 @@ void move_to_tail(tLista* lista){
     lista->curr=lista->tail;
     lista->pos=lista->listSize-1;
 }
-
-void limpieza(tNodo* head){
+int limpieza(tNodo* head){
     tNodo aux=lista->head->next;
     free(lista->head);
+    if(aux==NULL){
+        return 1;
+    }
     limpieza(aux);
+    return 0;
 }
-
 void clear(tLista* lista){
-    limpieza(lista->head);
+    return limpieza(lista->head);
 }
-
-int erase(tLista* lista, int tam){
-    
-}
-
 int espacio(tLista* lista, int tam){
     return 1;
+}
+int search(tNodo* nodo, int dato){
+    if(lista->head->dato1==dato){
+        lista->curr=lista->head;
+        return 1;
+    }
+    tNodo* aux=lista->head->next;
+    else if(aux->dato1==dato){
+        lista->curr->aux;
+        return 1;
+    }
+    search(aux,dato);
+    return 0;
+}
+
+int liberar(tLista* lista, int inicio){
+    if(search(lista->head, inicio)==0){
+        printf("no se encontro la Memoria\n");
+        return 0;
+    }
+    if (lista->curr->next==NULL){
+
+    }
 }
 
 int main(){
