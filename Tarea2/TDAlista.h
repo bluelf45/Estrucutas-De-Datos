@@ -19,8 +19,11 @@ typedef struct {
 void initList(tLista* lista);
 int insert(tLista* lista, int item1, int item2);//retorna posicion
 void move_to_head(tLista* lista);
+void move_to_tail(tLista* lista);
+int limpieza(tNodo* head);
 int clear(tLista lista);//eliminar la lista
-int erase(tLista* lista, int tam);//borra cierto elemento
 int espacio(tLista lista, int tam);//hay espacio en la lista?
+int search(tLista* lista, int dato);
+int liberar(tLista lista, int inicio);//libera espacio desde el byte "inicio"
 
 #endif
