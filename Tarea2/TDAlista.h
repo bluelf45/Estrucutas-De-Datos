@@ -15,15 +15,38 @@ typedef struct {
     unsigned int pos;
 } tLista;
 //retorna 1 si se hizo correctamente y 0 si no se logro
+int move_next(tLista* lista);
 
 void initList(tLista* lista);
-int insert(tLista* lista, int item1, int item2);//retorna posicion
+
+void initNodo(tNodo* nodo, int dato1, int dato2);
+
+void anterior(tLista* lista);
+
+void push(tLista* lista,int data1,int data2);
+
+int insert_nodo(tLista*lista,tNodo* nodo);
+
+tNodo* remove2(tLista* lista,int data1);
+
+void printlista(tLista* lista);
+
 void move_to_head(tLista* lista);
+
 void move_to_tail(tLista* lista);
+
 int limpieza(tNodo* head);
-int clear(tLista lista);//eliminar la lista
-int espacio(tLista lista, int tam);//hay espacio en la lista?
+
+int clear(tLista* lista);//eliminar la lista
+
 int search(tLista* lista, int dato);
-int liberar(tLista lista, int inicio);//libera espacio desde el byte "inicio"
+
+void free2(tLista* listaD, tLista* listaU, int byte);
+
+int malloc2(tLista* listaD, tLista* listaU, int bytesize);
+
+int tamLista(tLista* lista);
+
+int bytesLib(tLista* lista);
 
 #endif
