@@ -1,16 +1,16 @@
+#include "TDAlista.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include "TDAlista.h"
-
+#include <string.h>
 int main(){
     FILE* fp;
-    fp = fopen("input.dat","r");
+    fp = fopen("input1.dat","r");
     if (fp==NULL){
         printf("Error al abrir archivo");
         exit(1);
     }
     int M,N,cant;
-    char op,aux;
+    char *mf=(char*)malloc(sizeof(char)*6);
     fscanf(fp, "%d",&M);
     fscanf(fp, "%d",&N);
     tLista listaD, listaU;
@@ -20,20 +20,16 @@ int main(){
     initNodo(&nodoX, 1, M);
     insert_nodo(&listaD, &nodoX);
     for (int i = 0; i < N; i++){
-        op = getc(fp);
-        printf(op);
-        while ((aux = getc(fp)) != ' '){
-            ;
-        }
-        fscanf(fp, "%d",&cant);
-        if (op=='f'){
+        fscanf(fp, "%s %d", mf, &cant);
+        if (strcmp(mf,"free")==0){
             free2(&listaD,&listaU,cant);
         }
-        if (op=='m'){
+        if (strcmp(mf,"malloc")==0){
             malloc2(&listaD,&listaU,cant);
         }
     }
     fclose(fp);
-
+    free(mf);
     return 0;
 }
+
