@@ -3,19 +3,20 @@
 #include "TDAlista.h"
 //lista1 memoria disponible
 //lista2 memoria usada
-tNodo* centinela;
+
+tNodo* centinela;//nodo para guardar posiciones globalmente, solo es usado en una funcion
 
 /*****
-* TipoFunción NombreFunción
+* int move_next
 ******
-* Resumen Función
+* mueve lista->curr a la siguiente posicion, es decr, al siguiente nodo
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* tLista* lista : lista que queremos cambiar de posicion
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* int, retorna 0 si no se logro, o si esta en la cabeza de la lista. Sino retorna 1 diciendo que se hizo correctamente
 *****/
 int move_next(tLista* lista){
     if(lista->curr->next!=NULL){
@@ -51,16 +52,16 @@ int  contarBytes (tLista* lista){
 }
 
 /*****
-* TipoFunción NombreFunción
+* void initList
 ******
-* Resumen Función
+* iniciar una lista vacia sin nodos 
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* tLista* lista: puntero a un espacio de memoria con tamaño = sizeof(tLista)
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* void, no retorna nada
 *****/
 void initList(tLista* lista){
     lista->curr= malloc(sizeof(tNodo));
@@ -72,16 +73,17 @@ void initList(tLista* lista){
 }
 
 /*****
-* TipoFunción NombreFunción
+* void initNodo
 ******
-* Resumen Función
+* inicia un nodo con los datos proporcionados
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
-* .......
+* tNodo* nodo = espacio de memoria con tamaño de un nodo
+* int dato1 = dato de inicio de memoria del nodo (ej:byte 31)
+* int dato2 = dato final de memoria del nodo (ej: byte 40)
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* void no retorna nada
 *****/
 void initNodo(tNodo* nodo, int dato1, int dato2){
     nodo->data1=dato1;
@@ -90,16 +92,16 @@ void initNodo(tNodo* nodo, int dato1, int dato2){
 }
 
 /*****
-* TipoFunción NombreFunción
+* void anterior
 ******
-* Resumen Función
+* se mueve a la posicion anterior de la lista
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* tLista* lista : espacio de memoria de una lista
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* void no retorna nada
 *****/
 void anterior(tLista* lista){
     tNodo* aux=lista->curr;
@@ -113,16 +115,19 @@ void anterior(tLista* lista){
 }
 
 /*****
-* TipoFunción NombreFunción
+* void push
 ******
-* Resumen Función
+* inserta un nodo en la cabeza de la lista
 ******
 * Input:
+* tLista* lista = espacio de memoria de una lista
+* int data1=byte inicio del nodo al que queremos insertar
+* int data2=byte final del nodo al que queremos insertar
 * tipoParámetro NombreParámetro : Descripción Parámetro
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* void no retorna nada
 *****/
 void push(tLista* lista,int data1,int data2){
   move_to_head(lista);
@@ -135,16 +140,18 @@ void push(tLista* lista,int data1,int data2){
 }
 
 /*****
-* TipoFunción NombreFunción
+* int insert_nodo
 ******
-* Resumen Función
+* inserta un nodo en la posicion actual en la lista
 ******
 * Input:
+* tLista* lista : lista a la que le queremos insertar un nodo
+* tNodo* nodo : nodo que queremos insertar
 * tipoParámetro NombreParámetro : Descripción Parámetro
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* int retorna 0 si hubo algun error y retorna 1 si se hizo correctamente
 *****/
 int insert_nodo(tLista*lista,tNodo* nodo){
     if (nodo==NULL || lista==NULL){
@@ -174,16 +181,18 @@ int insert_nodo(tLista*lista,tNodo* nodo){
 }
 
 /*****
-* TipoFunción NombreFunción
+* tNodo* remove2
 ******
-* Resumen Función
+* remueve el nodo que tenga como byte de inicio a data1, sin quitarlo de la memoria
 ******
 * Input:
+* tLista* lista: puntero a la lista a la cual le queremos borrar un nodo
+* int data1 : byte de inicio del nodo que queremos borrar
 * tipoParámetro NombreParámetro : Descripción Parámetro
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* tNodo* temp : retorna el nodo eliminado de la lista, sin borrar su espacio de memoria
 *****/
 tNodo* remove2(tLista* lista,int data1){
    move_to_head(lista);
@@ -203,16 +212,16 @@ tNodo* remove2(tLista* lista,int data1){
 }
 
 /*****
-* TipoFunción NombreFunción
+* void print lista
 ******
-* Resumen Función
+* imprime la lista  y luego te deja en la cabeza de la lista
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* tLista lista : puntero a una lista enlazada
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* void : no retorna nada
 *****/
 void printlista(tLista* lista){
   move_to_head(lista);
@@ -226,16 +235,16 @@ void printlista(tLista* lista){
 }
 
 /*****
-* TipoFunción NombreFunción
+* void move_to_head
 ******
-* Resumen Función
+* te mueve a la cabeza de la lista
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* tLista* lista : puntero a una lista enlazada
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* void : no retorna nada
 *****/
 void move_to_head(tLista* lista){
     lista->curr=lista->head;
@@ -243,16 +252,16 @@ void move_to_head(tLista* lista){
 }
 
 /*****
-* TipoFunción NombreFunción
+* void move_to_tail
 ******
-* Resumen Función
+* te mueve a la cola de la lista
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* tLista* lista : puntero a una lista enlazada
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* void : no retorna nada
 *****/
 void move_to_tail(tLista* lista){
     lista->curr=lista->tail;
@@ -260,16 +269,16 @@ void move_to_tail(tLista* lista){
 }
 
 /*****
-* TipoFunción NombreFunción
+* int limpieza
 ******
-* Resumen Función
+* borrar una lista recursivamente
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* tNodo* nodo : inicialmente la cabeza de la lista
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* int 1 si se hizo correctamente y 0 de lo contrario
 *****/
 int limpieza(tNodo* nodo){
     tNodo* aux=nodo->next;
@@ -282,33 +291,34 @@ int limpieza(tNodo* nodo){
 }
 
 /*****
-* TipoFunción NombreFunción
+* int clear
 ******
-* Resumen Función
+* usa limpieza, esto debido a que no queriamos pasar un nodo para una funcion de limpieza, debido a que esto arruinaria e TDA
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* tLista* lista : lista enlazada a eliminar
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* int, retorna 1 si se logro
 *****/
 int clear(tLista* lista){
     limpieza(lista->head);
-    return 0;
+    return 1;
 }
 
 /*****
-* TipoFunción NombreFunción
+* int search
 ******
-* Resumen Función
+* busca el nodo que tenga como data1 a el valor dato
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* tLista* lista: lista enlazada
+* int dato : dato que es el byte de incio
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* int, retorna 0 si no se hizo correctamente y 1 si funciono de maravilla
 *****/
 int search(tLista* lista, int dato){
     move_to_head(lista);
