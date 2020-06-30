@@ -28,6 +28,18 @@ int move_next(tLista* lista){
     }
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+* .......
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 int  contarBytes (tLista* lista){
     move_to_head(lista);
     int cont = 0;
