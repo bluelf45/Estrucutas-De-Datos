@@ -39,7 +39,7 @@ void move_to_tail(tLista* lista);
 
 int limpieza(tNodo* head);
 
-int clear(tLista* lista);//eliminar la lista
+int clear(tLista* lista);
 
 int search(tLista* lista, int dato);
 
