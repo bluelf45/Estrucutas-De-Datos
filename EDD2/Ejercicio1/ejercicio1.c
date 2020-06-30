@@ -9,6 +9,7 @@ int main(){
         printf("Error al abrir archivo");
         exit(1);
     }
+    
     int M,N,cant;
     char *mf=(char*)malloc(sizeof(char)*6);
     fscanf(fp, "%d",&M);
@@ -19,6 +20,7 @@ int main(){
     tNodo nodoX;
     initNodo(&nodoX, 1, M);
     insert_nodo(&listaD, &nodoX);
+    
     for (int i = 0; i < N; i++){
         fscanf(fp, "%s %d", mf, &cant);
         printf("%d ",tamLista(&listaU));
@@ -29,7 +31,6 @@ int main(){
             malloc2(&listaD,&listaU,cant);
         }
     }
-    //printlista(&listaU);
     printf("Quedaron %d bloques sin liberar (%d bytes)\n",tamLista(&listaU),contarBytes(&listaU));
     fclose(fp);
     clear(&listaU);
