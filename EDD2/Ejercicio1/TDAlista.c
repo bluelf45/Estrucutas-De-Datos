@@ -38,7 +38,7 @@ int move_next(tLista* lista){
 * tLista* lista : Puntero que apunta a la lista 2, contiene todos los nodos asignados.
 ******
 * Returns:
-* int, returna la suma de espacio asignado total.
+* int: Returna la suma de espacio asignado total.
 *****/
 int  contarBytes (tLista* lista){
     move_to_head(lista);
@@ -60,8 +60,7 @@ int  contarBytes (tLista* lista){
 * .......
 ******
 * Returns:
-* void
-*  void : No retorna nada
+*  void: No retorna nada
 *****/
 void initList(tLista* lista){
     lista->curr= malloc(sizeof(tNodo));
