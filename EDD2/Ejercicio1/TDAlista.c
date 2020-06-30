@@ -434,16 +434,16 @@ int malloc2(tLista* listaD, tLista* listaU, int bytesize){
 }
 
 /*****
-* TipoFunción NombreFunción
+* int tamLista
 ******
-* Resumen Función
+* retorna el tamaño de la lista
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* tLista* lista : puntero a una lista enlazada
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* int retorna list->listSize, el cual es el tamaño de la lista
 *****/
 int tamLista(tLista* lista){
     return lista->listSize;
