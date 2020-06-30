@@ -4,6 +4,19 @@
 //lista1 memoria disponible
 //lista2 memoria usada
 tNodo* centinela;
+
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+* .......
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 int move_next(tLista* lista){
     if(lista->curr->next!=NULL){
         lista->curr=lista->curr->next;
@@ -25,6 +38,18 @@ int  contarBytes (tLista* lista){
     return cont;
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+* .......
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 void initList(tLista* lista){
     lista->curr= malloc(sizeof(tNodo));
     lista->head=lista->curr;
@@ -34,12 +59,36 @@ void initList(tLista* lista){
     lista->pos=0;
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+* .......
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 void initNodo(tNodo* nodo, int dato1, int dato2){
     nodo->data1=dato1;
     nodo->data2=dato2;
     nodo->next=NULL;
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+* .......
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 void anterior(tLista* lista){
     tNodo* aux=lista->curr;
     move_to_head(lista);
@@ -51,6 +100,18 @@ void anterior(tLista* lista){
     }
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+* .......
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 void push(tLista* lista,int data1,int data2){
   move_to_head(lista);
   tNodo* nodo=(tNodo*)malloc(sizeof(tNodo));
@@ -61,6 +122,18 @@ void push(tLista* lista,int data1,int data2){
   lista->listSize++;
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+* .......
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 int insert_nodo(tLista*lista,tNodo* nodo){
     if (nodo==NULL || lista==NULL){
         return 0;
@@ -88,6 +161,18 @@ int insert_nodo(tLista*lista,tNodo* nodo){
     return 1;
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+* .......
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 tNodo* remove2(tLista* lista,int data1){
    move_to_head(lista);
    tNodo* temp = lista->curr, *prev;
@@ -106,6 +191,18 @@ tNodo* remove2(tLista* lista,int data1){
    return temp;
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+* .......
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 void printlista(tLista* lista){
   move_to_head(lista);
   int i=0;
@@ -117,16 +214,52 @@ void printlista(tLista* lista){
   move_to_head(lista);
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+* .......
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 void move_to_head(tLista* lista){
     lista->curr=lista->head;
     lista->pos=0;
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+* .......
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 void move_to_tail(tLista* lista){
     lista->curr=lista->tail;
     lista->pos=lista->listSize-1;
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+* .......
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 int limpieza(tNodo* nodo){
     tNodo* aux=nodo->next;
     free(nodo);
@@ -137,11 +270,35 @@ int limpieza(tNodo* nodo){
     return 0;
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+* .......
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 int clear(tLista* lista){
     limpieza(lista->head);
     return 0;
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+* .......
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 int search(tLista* lista, int dato){
     move_to_head(lista);
     while(lista->curr!=NULL){
@@ -158,6 +315,18 @@ int search(tLista* lista, int dato){
     return 0;
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+* .......
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 void free2(tLista* listaD, tLista* listaU, int byte){
     tNodo* aux = remove2(listaU,byte);
     int bytes = aux->data2 - aux->data1;
@@ -204,6 +373,18 @@ void free2(tLista* listaD, tLista* listaU, int byte){
     printf("Bloque de %d bytes liberado\n", bytes);
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+* .......
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 int malloc2(tLista* listaD, tLista* listaU, int bytesize){
     int aval, inicio;
     tNodo* aux = (tNodo*)malloc(sizeof(tNodo));
@@ -230,10 +411,34 @@ int malloc2(tLista* listaD, tLista* listaU, int bytesize){
     return 0;
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+* .......
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 int tamLista(tLista* lista){
     return lista->listSize;
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+* .......
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 int bytesLib(tLista* lista){
     int count = 0;
     for (int i = 0; i < tamLista(lista); i++){
