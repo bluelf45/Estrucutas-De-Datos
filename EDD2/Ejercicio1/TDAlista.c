@@ -197,7 +197,6 @@ tNodo* remove2(tLista* lista,int data1){
      prev=temp;
      temp=temp->next;
    }
-   //queremos borrar temp->next
    prev->next=temp->next;
    lista->listSize--;
    return temp;
@@ -386,16 +385,17 @@ void free2(tLista* listaD, tLista* listaU, int byte){
 }
 
 /*****
-* TipoFunción NombreFunción
+* int malloc2
 ******
-* Resumen Función
-******
+* Esta funcion asigna nodos de memoria de tamaño "bytesize" a la lista 2, y reduce el tamaño
+* de un nodo de la lista 1 si es que existen espacio disponible. 
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
-* .......
+* tLista* ListaD: Puntero a la lista de disponible. 
+* tLista* ListaU: Puntero a la lista de memoria usada.
+* int bytesize: Entero que dice el tamaño del bloque a asignar.
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* int, retorna 0 si se hizo corrrectamente la signacion, y 1 si lo hizo correcto.
 *****/
 int malloc2(tLista* listaD, tLista* listaU, int bytesize){
     int aval, inicio;
