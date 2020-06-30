@@ -4,19 +4,19 @@
 //lista1 memoria disponible
 //lista2 memoria usada
 
-tNodo* centinela;//nodo para guardar posiciones globalmente, solo es usado en una funcion
+tNodo* centinela;//Nodo para guardar posiciones globalmente, solo es usado en una funcion.
 
 /*****
 * int move_next
 ******
-* mueve lista->curr a la siguiente posicion, es decr, al siguiente nodo
+* mueve lista->curr a la siguiente posicion, es decr, al siguiente nodo en la lista dada. 
 ******
 * Input:
-* tLista* lista : lista que queremos cambiar de posicion
+* tLista* lista : Lista que queremos cambiar de posicion.
 * .......
 ******
 * Returns:
-* int, retorna 0 si no se logro, o si esta en la cabeza de la lista. Sino retorna 1 diciendo que se hizo correctamente
+* int: Retorna 0 si no se logro, o si esta en la cabeza de la lista. Sino retorna 1 diciendo que se hizo correctamente.
 *****/
 int move_next(tLista* lista){
     if(lista->curr->next!=NULL){
@@ -30,16 +30,15 @@ int move_next(tLista* lista){
 }
 
 /*****
-* TipoFunción NombreFunción
+* int contarBytes
 ******
-* Resumen Función
+* Esta funcion suma la cantidad de bytes que todavia estan asignados a la lista 2.
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
-* .......
+* tLista* lista : Puntero que apunta a la lista 2, contiene todos los nodos asignados.
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* int, returna la suma de espacio asignado total.
 *****/
 int  contarBytes (tLista* lista){
     move_to_head(lista);
@@ -54,14 +53,15 @@ int  contarBytes (tLista* lista){
 /*****
 * void initList
 ******
-* iniciar una lista vacia sin nodos 
+* Iniciar una lista vacia sin nodos.
 ******
 * Input:
-* tLista* lista: puntero a un espacio de memoria con tamaño = sizeof(tLista)
+* tLista* lista: Puntero a un espacio de memoria con tamaño = sizeof(tLista)
 * .......
 ******
 * Returns:
-* void, no retorna nada
+* void
+*  void : No retorna nada
 *****/
 void initList(tLista* lista){
     lista->curr= malloc(sizeof(tNodo));
@@ -75,15 +75,15 @@ void initList(tLista* lista){
 /*****
 * void initNodo
 ******
-* inicia un nodo con los datos proporcionados
+* Inicia un nodo con los datos proporcionados.
 ******
 * Input:
-* tNodo* nodo = espacio de memoria con tamaño de un nodo
-* int dato1 = dato de inicio de memoria del nodo (ej:byte 31)
-* int dato2 = dato final de memoria del nodo (ej: byte 40)
+* tNodo* nodo = Espacio de memoria con tamaño de un nodo.
+* int dato1 = Dato de inicio de memoria del nodo. (ej:byte 31)
+* int dato2 = Dato final de memoria del nodo. (ej: byte 40)
 ******
 * Returns:
-* void no retorna nada
+* void: No retorna nada.
 *****/
 void initNodo(tNodo* nodo, int dato1, int dato2){
     nodo->data1=dato1;
@@ -94,14 +94,13 @@ void initNodo(tNodo* nodo, int dato1, int dato2){
 /*****
 * void anterior
 ******
-* se mueve a la posicion anterior de la lista
+* Se mueve a la posicion anterior de la lista.
 ******
 * Input:
-* tLista* lista : espacio de memoria de una lista
-* .......
+* tLista* lista : Espacio de memoria de una lista.
 ******
 * Returns:
-* void no retorna nada
+* void: No retorna nada
 *****/
 void anterior(tLista* lista){
     tNodo* aux=lista->curr;
@@ -117,17 +116,15 @@ void anterior(tLista* lista){
 /*****
 * void push
 ******
-* inserta un nodo en la cabeza de la lista
+* Inserta un nodo en la cabeza de la lista.
 ******
 * Input:
-* tLista* lista = espacio de memoria de una lista
-* int data1=byte inicio del nodo al que queremos insertar
-* int data2=byte final del nodo al que queremos insertar
-* tipoParámetro NombreParámetro : Descripción Parámetro
-* .......
+* tLista* lista = Espacio de memoria de una lista.
+* int data1=byte Inicio del nodo al que queremos insertar.
+* int data2=byte Final del nodo al que queremos insertar.
 ******
 * Returns:
-* void no retorna nada
+* void: No retorna nada.
 *****/
 void push(tLista* lista,int data1,int data2){
   move_to_head(lista);
@@ -142,16 +139,14 @@ void push(tLista* lista,int data1,int data2){
 /*****
 * int insert_nodo
 ******
-* inserta un nodo en la posicion actual en la lista
+* Inserta un nodo en la posicion actual en la lista.
 ******
 * Input:
-* tLista* lista : lista a la que le queremos insertar un nodo
-* tNodo* nodo : nodo que queremos insertar
-* tipoParámetro NombreParámetro : Descripción Parámetro
-* .......
+* tLista* lista : Lista a la que le queremos insertar un nodo
+* tNodo* nodo : Nodo que queremos insertar
 ******
 * Returns:
-* int retorna 0 si hubo algun error y retorna 1 si se hizo correctamente
+* int: Retorna 0 ocurre un error y retorna 1 si se hizo correctamente.
 *****/
 int insert_nodo(tLista*lista,tNodo* nodo){
     if (nodo==NULL || lista==NULL){
@@ -183,16 +178,14 @@ int insert_nodo(tLista*lista,tNodo* nodo){
 /*****
 * tNodo* remove2
 ******
-* remueve el nodo que tenga como byte de inicio a data1, sin quitarlo de la memoria
+* Remueve el nodo que tenga como byte de inicio a data1, sin quitarlo de la memoria.
 ******
 * Input:
-* tLista* lista: puntero a la lista a la cual le queremos borrar un nodo
-* int data1 : byte de inicio del nodo que queremos borrar
-* tipoParámetro NombreParámetro : Descripción Parámetro
-* .......
+* tLista* lista: Puntero a la lista a la cual le queremos borrar un nodo.
+* int data1 : Byte de inicio del nodo que queremos borrar.
 ******
 * Returns:
-* tNodo* temp : retorna el nodo eliminado de la lista, sin borrar su espacio de memoria
+* tNodo* temp : Retorna el nodo eliminado de la lista, sin borrar su espacio de memoria.
 *****/
 tNodo* remove2(tLista* lista,int data1){
    move_to_head(lista);
@@ -212,13 +205,12 @@ tNodo* remove2(tLista* lista,int data1){
 }
 
 /*****
-* void print lista
+* void printlista
 ******
-* imprime la lista  y luego te deja en la cabeza de la lista
+* Imprime la lista y luego te deja en la cabeza de la lista.
 ******
 * Input:
-* tLista lista : puntero a una lista enlazada
-* .......
+* tLista lista : Puntero a una lista enlazada.
 ******
 * Returns:
 * void : no retorna nada
@@ -237,11 +229,10 @@ void printlista(tLista* lista){
 /*****
 * void move_to_head
 ******
-* te mueve a la cabeza de la lista
+* Mueve curr a la cabeza de la lista.
 ******
 * Input:
 * tLista* lista : puntero a una lista enlazada
-* .......
 ******
 * Returns:
 * void : no retorna nada
@@ -254,14 +245,13 @@ void move_to_head(tLista* lista){
 /*****
 * void move_to_tail
 ******
-* te mueve a la cola de la lista
+* Mueve curr a la cola de la lista.
 ******
 * Input:
-* tLista* lista : puntero a una lista enlazada
-* .......
+* tLista* lista : Puntero a una lista enlazada.
 ******
 * Returns:
-* void : no retorna nada
+* void: No retorna nada
 *****/
 void move_to_tail(tLista* lista){
     lista->curr=lista->tail;
@@ -271,14 +261,13 @@ void move_to_tail(tLista* lista){
 /*****
 * int limpieza
 ******
-* borrar una lista recursivamente
+* Borrar una lista recursivamente.
 ******
 * Input:
-* tNodo* nodo : inicialmente la cabeza de la lista
-* .......
+* tNodo* nodo : Inicialmente la cabeza de la lista.
 ******
 * Returns:
-* int 1 si se hizo correctamente y 0 de lo contrario
+* int: 1 si se hizo correctamente y 0 de lo contrario.
 *****/
 int limpieza(tNodo* nodo){
     tNodo* aux=nodo->next;
@@ -293,11 +282,10 @@ int limpieza(tNodo* nodo){
 /*****
 * int clear
 ******
-* usa limpieza, esto debido a que no queriamos pasar un nodo para una funcion de limpieza, debido a que esto arruinaria e TDA
+* Usa limpieza, esto debido a que no queriamos pasar un nodo para una funcion de limpieza, debido a que esto arruinaria el TDA.
 ******
 * Input:
 * tLista* lista : lista enlazada a eliminar
-* .......
 ******
 * Returns:
 * int, retorna 1 si se logro
@@ -310,15 +298,14 @@ int clear(tLista* lista){
 /*****
 * int search
 ******
-* busca el nodo que tenga como data1 a el valor dato
+* Busca el nodo que tenga como data1 a el valor dato.
 ******
 * Input:
-* tLista* lista: lista enlazada
-* int dato : dato que es el byte de incio
-* .......
+* tLista* lista: Lista enlazada
+* int dato : Dato que es el byte de incio
 ******
 * Returns:
-* int, retorna 0 si no se hizo correctamente y 1 si funciono de maravilla
+* int: Retorna 0 ocurre un error y 1 si funciono correctamente.
 *****/
 int search(tLista* lista, int dato){
     move_to_head(lista);
@@ -343,7 +330,6 @@ int search(tLista* lista, int dato){
 ******
 * Input:
 * tipoParámetro NombreParámetro : Descripción Parámetro
-* .......
 ******
 * Returns:
 * TipoRetorno, Descripción retorno
@@ -402,10 +388,10 @@ void free2(tLista* listaD, tLista* listaU, int byte){
 * Input:
 * tLista* ListaD: Puntero a la lista de disponible. 
 * tLista* ListaU: Puntero a la lista de memoria usada.
-* int bytesize: Entero que dice el tamaño del bloque a asignar.
+* int bytesize: Entero que entrega el tamaño del bloque a asignar.
 ******
 * Returns:
-* int, retorna 0 si se hizo corrrectamente la signacion, y 1 si lo hizo correcto.
+* int, retorna 0 si ocurre un error, y 1 funciono correctamente.
 *****/
 int malloc2(tLista* listaD, tLista* listaU, int bytesize){
     int aval, inicio;
@@ -436,14 +422,14 @@ int malloc2(tLista* listaD, tLista* listaU, int bytesize){
 /*****
 * int tamLista
 ******
-* retorna el tamaño de la lista
+* Retorna el tamaño de la lista.
 ******
 * Input:
-* tLista* lista : puntero a una lista enlazada
+* tLista* lista : Puntero a una lista enlazada.
 * .......
 ******
 * Returns:
-* int retorna list->listSize, el cual es el tamaño de la lista
+* int: Retorna list->listSize, el cual es el tamaño de la lista.
 *****/
 int tamLista(tLista* lista){
     return lista->listSize;
