@@ -402,17 +402,17 @@ int malloc2(tLista* listaD, tLista* listaU, int bytesize){
     tNodo* aux = (tNodo*)malloc(sizeof(tNodo));
     move_to_head(listaD);
     while(listaD->pos<listaD->listSize){
-        aval = listaD->curr->data2 - listaD->curr->data1+1; //Calcula el espacio disponible
+        aval = listaD->curr->data2 - listaD->curr->data1+1;
         if(aval >= bytesize){
             tNodo* aux2 = (tNodo*)malloc(sizeof(tNodo*));
             inicio = listaD->curr->data1;
             aux2->data1 = inicio;
             aux2->data2 = inicio + bytesize;
-            insert_nodo(listaU, aux2); //Fijarse como funcionaba el insert. || Esto lo añade a la lista 2.
+            insert_nodo(listaU, aux2); 
             printf("Bloque de %i bytes asignado a partir del byte %i\n", bytesize, listaD->curr->data1);
-            listaD->curr->data1 = inicio + bytesize; //Cambia el tamaño del nodo en la lista 1.
-            if (listaD->curr->data1 >= listaD->curr->data2){ //Se Fija si el tamaño del espacio ocupado es 0 o menor que. Si es asi, quita este nodo.
-                aux = remove2(listaD, listaD->curr->data1); //<-------------- Fijate en esta
+            listaD->curr->data1 = inicio + bytesize;
+            if (listaD->curr->data1 >= listaD->curr->data2){
+                aux = remove2(listaD, listaD->curr->data1); 
                 free(aux);
             }
             return 1;
