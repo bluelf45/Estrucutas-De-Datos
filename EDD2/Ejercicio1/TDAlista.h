@@ -14,7 +14,7 @@ typedef struct {
     unsigned int listSize;
     unsigned int pos;
 } tLista;
-
+//retorna 1 si se hizo correctamente y 0 si no se logro
 int move_next(tLista* lista);
 
 int  contarBytes (tLista* lista);
@@ -37,9 +37,7 @@ void move_to_head(tLista* lista);
 
 void move_to_tail(tLista* lista);
 
-int limpieza(tNodo* head);
-
-int clear(tLista* lista);
+void clear(tLista* lista);//eliminar la lista
 
 int search(tLista* lista, int dato);
 
