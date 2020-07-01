@@ -3,13 +3,11 @@
 #include "TDAlista.h"
 //lista1 memoria disponible
 //lista2 memoria usada
-
-tNodo* centinela;//Nodo para guardar posiciones globalmente, solo es usado en una funcion.
-
+tNodo* centinela;
 /*****
 * int move_next
 ******
-* mueve lista->curr a la siguiente posicion, es decr, al siguiente nodo en la lista dada. 
+* mueve lista->curr a la siguiente posicion, es decr, al siguiente nodo en la lista dada.
 ******
 * Input:
 * tLista* lista : Lista que queremos cambiar de posicion.
@@ -28,7 +26,6 @@ int move_next(tLista* lista){
         return 0;
     }
 }
-
 /*****
 * int contarBytes
 ******
@@ -49,7 +46,6 @@ int  contarBytes (tLista* lista){
     }
     return cont;
 }
-
 /*****
 * void initList
 ******
@@ -63,9 +59,7 @@ int  contarBytes (tLista* lista){
 *  void: No retorna nada
 *****/
 void initList(tLista* lista){
-    lista->curr= malloc(sizeof(tNodo));
-    lista->head=lista->curr;
-    lista->tail=lista->curr;
+    lista->curr = lista->head = lista->tail = (tNodo *)malloc(sizeof(tNodo));
     lista->tail->next=NULL;
     lista->listSize=0;
     lista->pos=0;
@@ -188,16 +182,18 @@ int insert_nodo(tLista*lista,tNodo* nodo){
 *****/
 tNodo* remove2(tLista* lista,int data1){
    move_to_head(lista);
-   tNodo* temp = lista->curr, *prev;
+   tNodo* temp = lista->curr;
    if (lista->head->data1==data1){
      lista->head=temp->next;
      lista->listSize--;
      return temp;
    }
-   while(temp->next!=NULL && temp->data1!=data1){
+   tNodo* prev;
+   while(temp!=NULL && temp->data1!=data1){
      prev=temp;
      temp=temp->next;
    }
+   //queremos borrar temp->next
    prev->next=temp->next;
    lista->listSize--;
    return temp;
@@ -258,40 +254,27 @@ void move_to_tail(tLista* lista){
 }
 
 /*****
-* int limpieza
+* void clear
 ******
-* Borrar una lista recursivamente.
-******
-* Input:
-* tNodo* nodo : Inicialmente la cabeza de la lista.
-******
-* Returns:
-* int: 1 si se hizo correctamente y 0 de lo contrario.
-*****/
-int limpieza(tNodo* nodo){
-    tNodo* aux=nodo->next;
-    free(nodo);
-    if(aux==NULL){
-        return 1;
-    }
-    limpieza(aux);
-    return 0;
-}
-
-/*****
-* int clear
-******
-* Usa limpieza, esto debido a que no queriamos pasar un nodo para una funcion de limpieza, debido a que esto arruinaria el TDA.
+* funcion para eliminar completamente una lista
 ******
 * Input:
 * tLista* lista : lista enlazada a eliminar
 ******
 * Returns:
-* int, retorna 1 si se logro
+* void no retorna nada
 *****/
-int clear(tLista* lista){
-    limpieza(lista->head);
-    return 1;
+void clear(tLista* lista){
+    tNodo* aux;
+    lista->curr = lista->head;
+    int i=0;
+    while(lista->curr != NULL){
+        aux = lista->curr->next;
+        printf("%d",i);
+        i++;
+        free(lista->curr);
+        lista->curr = aux;
+    }
 }
 
 /*****
@@ -323,18 +306,21 @@ int search(tLista* lista, int dato){
 }
 
 /*****
-* TipoFunción NombreFunción
+* void free2
 ******
-* Resumen Función
+* se encarga de liberar el espacio de memoria correspondiente al bloque comenzando en el byte solicitado, ademas,
+  revisa si la memoria disponible se encuentra en bloques contiguos, de ser asi, los une
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* tLista* listaD: Lista enlazada del espacio disponible en la memoria
+* tLista* listaU: Lista enlazada del espacio utilizado en la memoria
+* int byte: byte donde comienza el bloque que se quiere liberar
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* La funcion es void, no retorna nada
 *****/
 void free2(tLista* listaD, tLista* listaU, int byte){
-    tNodo* aux = remove2(listaU,byte);
+    tNodo* aux=remove2(listaU,byte);
     int bytes = aux->data2 - aux->data1;
     move_to_head(listaD);
     while (listaD->curr->data2 < aux->data1){
@@ -362,11 +348,7 @@ void free2(tLista* listaD, tLista* listaU, int byte){
             listaD->curr->data2=aux->data2;
             if (listaD->curr->data2==listaD->curr->next->data1-1){
                 listaD->curr->data2 = listaD->curr->next->data1;
-                tNodo* aux1 = remove2(listaD, listaD->curr->next->data1);
-                free(aux1);
-
             }
-            free(aux);
         }
         else if (aux->data2==listaD->curr->next->data1-1){
             listaD->curr->next->data1=aux->data1;
@@ -383,9 +365,9 @@ void free2(tLista* listaD, tLista* listaU, int byte){
 * int malloc2
 ******
 * Esta funcion asigna nodos de memoria de tamaño "bytesize" a la lista 2, y reduce el tamaño
-* de un nodo de la lista 1 si es que existen espacio disponible. 
+* de un nodo de la lista 1 si es que existen espacio disponible.
 * Input:
-* tLista* ListaD: Puntero a la lista de disponible. 
+* tLista* ListaD: Puntero a la lista de disponible.
 * tLista* ListaU: Puntero a la lista de memoria usada.
 * int bytesize: Entero que entrega el tamaño del bloque a asignar.
 ******
@@ -394,21 +376,18 @@ void free2(tLista* listaD, tLista* listaU, int byte){
 *****/
 int malloc2(tLista* listaD, tLista* listaU, int bytesize){
     int aval, inicio;
-    tNodo* aux = (tNodo*)malloc(sizeof(tNodo));
     move_to_head(listaD);
     while(listaD->pos<listaD->listSize){
-        aval = listaD->curr->data2 - listaD->curr->data1+1;
+        aval = listaD->curr->data2 - listaD->curr->data1+1; //Calcula el espacio disponible
         if(aval >= bytesize){
-            tNodo* aux2 = (tNodo*)malloc(sizeof(tNodo*));
+            tNodo* aux2=(tNodo*)malloc(sizeof(tNodo));
             inicio = listaD->curr->data1;
-            aux2->data1 = inicio;
-            aux2->data2 = inicio + bytesize;
-            insert_nodo(listaU, aux2); 
+            initNodo(aux2,inicio,inicio+bytesize);
+            insert_nodo(listaU, aux2); //Fijarse como funcionaba el insert. || Esto lo añade a la lista 2.
             printf("Bloque de %i bytes asignado a partir del byte %i\n", bytesize, listaD->curr->data1);
-            listaD->curr->data1 = inicio + bytesize;
-            if (listaD->curr->data1 >= listaD->curr->data2){
-                aux = remove2(listaD, listaD->curr->data1); 
-                free(aux);
+            listaD->curr->data1 = inicio + bytesize; //Cambia el tamaño del nodo en la lista 1.
+            if (listaD->curr->data1 >= listaD->curr->data2){ //Se Fija si el tamaño del espacio ocupado es 0 o menor que. Si es asi, quita este nodo.
+                free(remove2(listaD, listaD->curr->data1)); //<-------------- Fijate en esta
             }
             return 1;
         }
