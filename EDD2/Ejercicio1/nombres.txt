@@ -1,1 +1,0 @@
-Juan Pablo Cassis Oyanadel, 201973519-5, 200, programe las funciones main, free2, contarBytes e initNodo. Ademas, ayude a la hora de arreglar los warnings que aparecieran luego de elaborar las funciones y el programa en si.
