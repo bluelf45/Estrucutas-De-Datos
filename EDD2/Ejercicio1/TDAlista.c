@@ -14,7 +14,7 @@ tNodo* centinela;
 * .......
 ******
 * Returns:
-* int: Retorna 0 si no se logro, o si esta en la cabeza de la lista. Sino retorna 1 diciendo que se hizo correctamente.
+* int: Retorna 0 si no se logro, o si esta en la cabeza de la lista. Sino, retorna 1 diciendo que se hizo correctamente.
 *****/
 int move_next(tLista* lista){
     if(lista->curr->next!=NULL){
@@ -113,8 +113,8 @@ void anterior(tLista* lista){
 ******
 * Input:
 * tLista* lista = Espacio de memoria de una lista.
-* int data1=byte Inicio del nodo al que queremos insertar.
-* int data2=byte Final del nodo al que queremos insertar.
+* int data1 = byte Inicio del nodo al que queremos insertar.
+* int data2 = byte Final del nodo al que queremos insertar.
 ******
 * Returns:
 * void: No retorna nada.
@@ -135,7 +135,7 @@ void push(tLista* lista,int data1,int data2){
 * Inserta un nodo en la posicion actual en la lista.
 ******
 * Input:
-* tLista* lista : Lista a la que le queremos insertar un nodo
+* tLista* lista : Puntero a la lista que le queremos insertar un nodo.
 * tNodo* nodo : Nodo que queremos insertar
 ******
 * Returns:
@@ -208,7 +208,7 @@ tNodo* remove2(tLista* lista,int data1){
 * tLista lista : Puntero a una lista enlazada.
 ******
 * Returns:
-* void : no retorna nada
+* void : No retorna nada.
 *****/
 void printlista(tLista* lista){
   move_to_head(lista);
@@ -227,10 +227,10 @@ void printlista(tLista* lista){
 * Mueve curr a la cabeza de la lista.
 ******
 * Input:
-* tLista* lista : puntero a una lista enlazada
+* tLista* lista : Puntero a una lista enlazada.
 ******
 * Returns:
-* void : no retorna nada
+* void : No retorna nada.
 *****/
 void move_to_head(tLista* lista){
     lista->curr=lista->head;
@@ -256,13 +256,13 @@ void move_to_tail(tLista* lista){
 /*****
 * void clear
 ******
-* funcion para eliminar completamente una lista
+* Funcion para eliminar completamente una lista.
 ******
 * Input:
-* tLista* lista : lista enlazada a eliminar
+* tLista* lista : Lista enlazada a eliminar.
 ******
 * Returns:
-* void no retorna nada
+* void : No retorna nada.
 *****/
 void clear(tLista* lista){
     tNodo* aux;
@@ -317,7 +317,7 @@ int search(tLista* lista, int dato){
 * int byte: byte donde comienza el bloque que se quiere liberar
 ******
 * Returns:
-* La funcion es void, no retorna nada
+* void : No retorna nada.
 *****/
 void free2(tLista* listaD, tLista* listaU, int byte){
     tNodo* aux=remove2(listaU,byte);
@@ -365,7 +365,7 @@ void free2(tLista* listaD, tLista* listaU, int byte){
 * int malloc2
 ******
 * Esta funcion asigna nodos de memoria de tamaño "bytesize" a la lista 2, y reduce el tamaño
-* de un nodo de la lista 1 si es que existen espacio disponible.
+  de un nodo de la lista 1 si es que existen espacio disponible.
 * Input:
 * tLista* ListaD: Puntero a la lista de disponible.
 * tLista* ListaU: Puntero a la lista de memoria usada.
@@ -404,7 +404,6 @@ int malloc2(tLista* listaD, tLista* listaU, int bytesize){
 ******
 * Input:
 * tLista* lista : Puntero a una lista enlazada.
-* .......
 ******
 * Returns:
 * int: Retorna list->listSize, el cual es el tamaño de la lista.
@@ -420,7 +419,6 @@ int tamLista(tLista* lista){
 ******
 * Input:
 * tipoParámetro NombreParámetro : Descripción Parámetro
-* .......
 ******
 * Returns:
 * TipoRetorno, Descripción retorno
