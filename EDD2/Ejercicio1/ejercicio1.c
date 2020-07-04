@@ -35,19 +35,25 @@ int main(){
     tNodo* nodoX=(tNodo*)malloc(sizeof(tNodo));
     initNodo(nodoX, 1, M);
     insert_nodo(listaD, nodoX);
+    FILE* fm = fopen("output.dat","w");
     for (int i = 0; i < N; i++){
         fscanf(fp, "%s %d", mf, &cant);
-        printf("%d ",tamLista(listaU));
         if (strcmp(mf,"free")==0){
-            free2(listaD,listaU,cant);
+            free2(listaD, listaU, cant, fm);
         }
         if (strcmp(mf,"malloc")==0){
-            malloc2(listaD,listaU,cant);
+            malloc2(listaD, listaU, cant, fm);
         }
     }
-    //printlista(&listaU);
-    printf("Quedaron %d bloques sin liberar (%d bytes)\n",tamLista(listaU),contarBytes(listaU));
+    int bytes=contarBytes(listaU);
+    if(bytes>0){
+        fprintf(fm,"Quedaron %d bloques sin liberar (%d bytes)\n",tamLista(listaU),contarBytes(listaU));
+    }
+    else{
+        fprintf(fm,"Toda la memoria dinamica pedida fue liberada\n");
+    }
     fclose(fp);
+    fclose(fm);
     free(mf);
     clear(listaD);
     clear(listaU);
