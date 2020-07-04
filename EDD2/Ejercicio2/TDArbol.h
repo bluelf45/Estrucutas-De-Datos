@@ -16,9 +16,13 @@ typedef struct {
 
 void initArbol(arbolBin* arbol);
 void initNodo(tNodo* nodo, int item);
+void clearHelp(tNodo* nodo);
 void clear(arbolBin* arbol);
-void Borrar(arbolBin* arbol);
-void Sucesor(arbolBin* arbol, int item);
+tNodo* encontrarMax(tNodo* nodo);
+tNodo* borrarHelp(tNodo* nodo, int item);
+int Borrar(arbolBin* arbol, int item);
+int Sucesor(arbolBin* arbol, int item, int u);
+int sucesorHelp(tNodo* nodo, int item);
 int insertHelp(tNodo* nodo, int item);
 void insertar(arbolBin* arbol, int item);
 void printPreNodo(tNodo* nodo);
