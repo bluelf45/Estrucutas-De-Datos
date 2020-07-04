@@ -106,28 +106,6 @@ void anterior(tLista* lista){
     }
 }
 
-/*****
-* void push
-******
-* Inserta un nodo en la cabeza de la lista.
-******
-* Input:
-* tLista* lista = Espacio de memoria de una lista.
-* int data1 = byte Inicio del nodo al que queremos insertar.
-* int data2 = byte Final del nodo al que queremos insertar.
-******
-* Returns:
-* void: No retorna nada.
-*****/
-void push(tLista* lista,int data1,int data2){
-  move_to_head(lista);
-  tNodo* nodo=(tNodo*)malloc(sizeof(tNodo));
-  nodo->data1=data1;
-  nodo->data2=data2;
-  nodo->next=lista->head;
-  lista->head=nodo;
-  lista->listSize++;
-}
 
 /*****
 * int insert_nodo
@@ -199,27 +177,6 @@ tNodo* remove2(tLista* lista,int data1){
    return temp;
 }
 
-/*****
-* void printlista
-******
-* Imprime la lista y luego te deja en la cabeza de la lista.
-******
-* Input:
-* tLista lista : Puntero a una lista enlazada.
-******
-* Returns:
-* void : No retorna nada.
-*****/
-void printlista(tLista* lista){
-  move_to_head(lista);
-  int i=0;
-  while(i<lista->listSize){
-    printf("%d %d %d\n", i, lista->curr->data1, lista->curr->data2);
-    lista->curr=lista->curr->next;
-    i++;
-  }
-  move_to_head(lista);
-}
 
 /*****
 * void move_to_head
@@ -235,22 +192,6 @@ void printlista(tLista* lista){
 void move_to_head(tLista* lista){
     lista->curr=lista->head;
     lista->pos=0;
-}
-
-/*****
-* void move_to_tail
-******
-* Mueve curr a la cola de la lista.
-******
-* Input:
-* tLista* lista : Puntero a una lista enlazada.
-******
-* Returns:
-* void: No retorna nada
-*****/
-void move_to_tail(tLista* lista){
-    lista->curr=lista->tail;
-    lista->pos=lista->listSize-1;
 }
 
 /*****
