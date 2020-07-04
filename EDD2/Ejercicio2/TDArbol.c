@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include "TDArbol.h"
-
+int i;
 void initArbol(arbolBin* arbol){
     arbol->raiz=NULL;
     arbol->nElems=0;
@@ -87,59 +87,31 @@ int Borrar(arbolBin* arbol, int item){
     }
 }
 
-int Sucesor(arbolBin* arbol, int item, int u){
-    int aux;
-    printf("item = %d\n", item);
-    if(arbol->raiz==NULL){
-        if (item<u){
-            return u;
+void Sucesor(arbolBin* arbol, int item, int u){
+    i = 0;
+    if(arbol->raiz!=NULL){
+        if (encontrarMax(arbol->raiz)->dato < item){
+            printf("%d \n", u);
         }
-        else {
-            return -1;
-        }
-    }
-    aux = sucesorHelp(arbol->raiz,item);
-    if (aux == -1){
-        return u;
     }
     else{
-        return aux;
+        printf("%d \n", u);
     }
+    sucesorHelp(arbol->raiz, item);
 }
 
-int sucesorHelp(tNodo* nodo, int item){
-    printf("nodo dato = %d\n", nodo->dato);
-    if(nodo==NULL){
-        return -1;
+void sucesorHelp(tNodo* nodo, int item){
+    if (nodo == NULL){
+        return;
     }
-    if (nodo->dato==item){
-        if (nodo->right!=NULL){
-            sucesorHelp(nodo->right, item);
-        }
-        else{
-            return -1;
-        }
+    sucesorHelp(nodo->left, item);
+    if (nodo->dato > item && i == 0){
+        printf ( "%d \n", nodo->dato);
+        i = -1;
+        return;
     }
-    else if (nodo->dato > item){
-        if ( nodo->left == NULL || nodo->left->dato < item){
-            return nodo->dato;
-        }
-        else if(nodo->left->dato > item || nodo->left->dato==item){
-            sucesorHelp(nodo->left, item);
-        }
-    }
-    else if (nodo->dato < item){
-        if (nodo->right->dato > item){
-            sucesorHelp(nodo->right, item);
-        }
-        else if(nodo->right == NULL || nodo->right->dato < item){
-            return nodo->dato;
-        }
-        else if (nodo->dato < item && nodo->right == NULL){
-            return -1;
-        }
-    }
-    return nodo->dato;
+    sucesorHelp(nodo->right, item);
+
 }
 
 int insertHelp(tNodo* nodo, int item){
