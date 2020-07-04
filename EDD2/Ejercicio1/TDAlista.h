@@ -17,7 +17,7 @@ typedef struct {
 //retorna 1 si se hizo correctamente y 0 si no se logro
 int move_next(tLista* lista);
 
-int  contarBytes (tLista* lista);
+int contarBytes (tLista* lista);
 
 void initList(tLista* lista);
 
@@ -25,17 +25,11 @@ void initNodo(tNodo* nodo, int dato1, int dato2);
 
 void anterior(tLista* lista);
 
-void push(tLista* lista,int data1,int data2);
-
 int insert_nodo(tLista*lista,tNodo* nodo);
 
 tNodo* remove2(tLista* lista,int data1);
 
-void printlista(tLista* lista);
-
 void move_to_head(tLista* lista);
-
-void move_to_tail(tLista* lista);
 
 void clear(tLista* lista);//eliminar la lista
 
