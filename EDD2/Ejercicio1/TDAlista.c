@@ -14,7 +14,7 @@ tNodo* centinela;
 * .......
 ******
 * Returns:
-* int: Retorna 0 si no se logro, o si esta en la cabeza de la lista. Sino, retorna 1 diciendo que se hizo correctamente.
+* int: Retorna 0 si no se logro, o si esta en la cabeza de la lista. Sino retorna 1 diciendo que se hizo correctamente.
 *****/
 int move_next(tLista* lista){
     if(lista->curr->next!=NULL){
@@ -106,6 +106,28 @@ void anterior(tLista* lista){
     }
 }
 
+/*****
+* void push
+******
+* Inserta un nodo en la cabeza de la lista.
+******
+* Input:
+* tLista* lista = Espacio de memoria de una lista.
+* int data1=byte Inicio del nodo al que queremos insertar.
+* int data2=byte Final del nodo al que queremos insertar.
+******
+* Returns:
+* void: No retorna nada.
+*****/
+void push(tLista* lista,int data1,int data2){
+    move_to_head(lista);
+    tNodo* nodo=(tNodo*)malloc(sizeof(tNodo));
+    nodo->data1=data1;
+    nodo->data2=data2;
+    nodo->next=lista->head;
+    lista->head=nodo;
+    lista->listSize++;
+}
 
 /*****
 * int insert_nodo
@@ -113,7 +135,7 @@ void anterior(tLista* lista){
 * Inserta un nodo en la posicion actual en la lista.
 ******
 * Input:
-* tLista* lista : Puntero a la lista que le queremos insertar un nodo.
+* tLista* lista : Lista a la que le queremos insertar un nodo
 * tNodo* nodo : Nodo que queremos insertar
 ******
 * Returns:
@@ -159,24 +181,45 @@ int insert_nodo(tLista*lista,tNodo* nodo){
 * tNodo* temp : Retorna el nodo eliminado de la lista, sin borrar su espacio de memoria.
 *****/
 tNodo* remove2(tLista* lista,int data1){
-   move_to_head(lista);
-   tNodo* temp = lista->curr;
-   if (lista->head->data1==data1){
-     lista->head=temp->next;
-     lista->listSize--;
-     return temp;
-   }
-   tNodo* prev;
-   while(temp!=NULL && temp->data1!=data1){
-     prev=temp;
-     temp=temp->next;
-   }
-   //queremos borrar temp->next
-   prev->next=temp->next;
-   lista->listSize--;
-   return temp;
+    move_to_head(lista);
+    tNodo* temp = lista->curr;
+    if (lista->head->data1==data1){
+        lista->head=temp->next;
+        lista->listSize--;
+        return temp;
+    }
+    tNodo* prev;
+    while(temp!=NULL && temp->data1!=data1){
+        prev=temp;
+        temp=temp->next;
+    }
+    //queremos borrar temp->next
+    prev->next=temp->next;
+    lista->listSize--;
+    return temp;
 }
 
+/*****
+* void printlista
+******
+* Imprime la lista y luego te deja en la cabeza de la lista.
+******
+* Input:
+* tLista lista : Puntero a una lista enlazada.
+******
+* Returns:
+* void : no retorna nada
+*****/
+void printlista(tLista* lista){
+    move_to_head(lista);
+    int i=0;
+    while(i<lista->listSize){
+        printf("%d %d %d\n", i, lista->curr->data1, lista->curr->data2);
+        lista->curr=lista->curr->next;
+        i++;
+    }
+    move_to_head(lista);
+}
 
 /*****
 * void move_to_head
@@ -184,10 +227,10 @@ tNodo* remove2(tLista* lista,int data1){
 * Mueve curr a la cabeza de la lista.
 ******
 * Input:
-* tLista* lista : Puntero a una lista enlazada.
+* tLista* lista : puntero a una lista enlazada
 ******
 * Returns:
-* void : No retorna nada.
+* void : no retorna nada
 *****/
 void move_to_head(tLista* lista){
     lista->curr=lista->head;
@@ -195,15 +238,31 @@ void move_to_head(tLista* lista){
 }
 
 /*****
-* void clear
+* void move_to_tail
 ******
-* Funcion para eliminar completamente una lista.
+* Mueve curr a la cola de la lista.
 ******
 * Input:
-* tLista* lista : Lista enlazada a eliminar.
+* tLista* lista : Puntero a una lista enlazada.
 ******
 * Returns:
-* void : No retorna nada.
+* void: No retorna nada
+*****/
+void move_to_tail(tLista* lista){
+    lista->curr=lista->tail;
+    lista->pos=lista->listSize-1;
+}
+
+/*****
+* void clear
+******
+* funcion para eliminar completamente una lista
+******
+* Input:
+* tLista* lista : lista enlazada a eliminar
+******
+* Returns:
+* void no retorna nada
 *****/
 void clear(tLista* lista){
     tNodo* aux;
@@ -211,7 +270,6 @@ void clear(tLista* lista){
     int i=0;
     while(lista->curr != NULL){
         aux = lista->curr->next;
-        printf("%d",i);
         i++;
         free(lista->curr);
         lista->curr = aux;
@@ -258,10 +316,10 @@ int search(tLista* lista, int dato){
 * int byte: byte donde comienza el bloque que se quiere liberar
 ******
 * Returns:
-* void : No retorna nada.
+* La funcion es void, no retorna nada
 *****/
-void free2(tLista* listaD, tLista* listaU, int byte){
-    tNodo* aux=remove2(listaU,byte);
+void free2(tLista* listaD, tLista* listaU, int byte, FILE* fp){
+    tNodo* aux=remove2(listaU, byte);
     int bytes = aux->data2 - aux->data1;
     move_to_head(listaD);
     while (listaD->curr->data2 < aux->data1){
@@ -299,14 +357,14 @@ void free2(tLista* listaD, tLista* listaU, int byte){
             insert_nodo(listaD,aux);
         }
     }
-    printf("Bloque de %d bytes liberado\n", bytes);
+    fprintf(fp, "Bloque de %d bytes liberado\n", bytes);
 }
 
 /*****
 * int malloc2
 ******
 * Esta funcion asigna nodos de memoria de tamaño "bytesize" a la lista 2, y reduce el tamaño
-  de un nodo de la lista 1 si es que existen espacio disponible.
+* de un nodo de la lista 1 si es que existen espacio disponible.
 * Input:
 * tLista* ListaD: Puntero a la lista de disponible.
 * tLista* ListaU: Puntero a la lista de memoria usada.
@@ -315,7 +373,7 @@ void free2(tLista* listaD, tLista* listaU, int byte){
 * Returns:
 * int, retorna 0 si ocurre un error, y 1 funciono correctamente.
 *****/
-int malloc2(tLista* listaD, tLista* listaU, int bytesize){
+int malloc2(tLista* listaD, tLista* listaU, int bytesize, FILE* fp){
     int aval, inicio;
     move_to_head(listaD);
     while(listaD->pos<listaD->listSize){
@@ -325,7 +383,7 @@ int malloc2(tLista* listaD, tLista* listaU, int bytesize){
             inicio = listaD->curr->data1;
             initNodo(aux2,inicio,inicio+bytesize);
             insert_nodo(listaU, aux2); //Fijarse como funcionaba el insert. || Esto lo añade a la lista 2.
-            printf("Bloque de %i bytes asignado a partir del byte %i\n", bytesize, listaD->curr->data1);
+            fprintf(fp, "Bloque de %i bytes asignado a partir del byte %i\n", bytesize, listaD->curr->data1);
             listaD->curr->data1 = inicio + bytesize; //Cambia el tamaño del nodo en la lista 1.
             if (listaD->curr->data1 >= listaD->curr->data2){ //Se Fija si el tamaño del espacio ocupado es 0 o menor que. Si es asi, quita este nodo.
                 free(remove2(listaD, listaD->curr->data1)); //<-------------- Fijate en esta
@@ -334,7 +392,7 @@ int malloc2(tLista* listaD, tLista* listaU, int bytesize){
         }
         move_next(listaD);
     }
-    printf("Bloque de %d bytes NO puede ser asignado\n",bytesize);
+    fprintf(fp, "Bloque de %d bytes NO puede ser asignado\n", bytesize);
     return 0;
 }
 
@@ -345,6 +403,7 @@ int malloc2(tLista* listaD, tLista* listaU, int bytesize){
 ******
 * Input:
 * tLista* lista : Puntero a una lista enlazada.
+* .......
 ******
 * Returns:
 * int: Retorna list->listSize, el cual es el tamaño de la lista.
@@ -360,6 +419,7 @@ int tamLista(tLista* lista){
 ******
 * Input:
 * tipoParámetro NombreParámetro : Descripción Parámetro
+* .......
 ******
 * Returns:
 * TipoRetorno, Descripción retorno
