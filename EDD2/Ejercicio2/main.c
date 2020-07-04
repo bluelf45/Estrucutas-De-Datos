@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "TDArbol.h"
+basti porfavor no me hagas esto porfavor basti que no quiero comentar estos codigs porfavor basti
 int main(){
     int u, numero;
     FILE*  fp;
