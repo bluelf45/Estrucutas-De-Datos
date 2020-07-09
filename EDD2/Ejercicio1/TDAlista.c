@@ -41,7 +41,7 @@ int  contarBytes (tLista* lista){
     move_to_head(lista);
     int cont = 0;
     for (int i = 0; i < lista->listSize; i++){
-        cont += lista->curr->data2 - lista->curr->data1;
+        cont += (lista->curr->data2 - lista->curr->data1)+1;
         move_next(lista);
     }
     return cont;
@@ -100,7 +100,7 @@ void anterior(tLista* lista){
     move_to_head(lista);
     while(1){
         if(lista->curr->next==aux){
-            break;
+            return;
         }
         move_next(lista);
     }
@@ -120,13 +120,13 @@ void anterior(tLista* lista){
 * void: No retorna nada.
 *****/
 void push(tLista* lista,int data1,int data2){
-    move_to_head(lista);
-    tNodo* nodo=(tNodo*)malloc(sizeof(tNodo));
-    nodo->data1=data1;
-    nodo->data2=data2;
-    nodo->next=lista->head;
-    lista->head=nodo;
-    lista->listSize++;
+  move_to_head(lista);
+  tNodo* nodo=(tNodo*)malloc(sizeof(tNodo));
+  nodo->data1=data1;
+  nodo->data2=data2;
+  nodo->next=lista->head;
+  lista->head=nodo;
+  lista->listSize++;
 }
 
 /*****
@@ -167,6 +167,30 @@ int insert_nodo(tLista*lista,tNodo* nodo){
     lista->listSize++;
     return 1;
 }
+void sort(tLista* lista){
+    if(lista->listSize<=1 || lista==NULL){
+        return;
+    }
+    move_to_head(lista);
+    tNodo* temp1=lista->head;
+    tNodo* temp2;
+    int data1,data2;
+    for(int i=0; i<lista->listSize; i++){
+        for(int j=0;j<lista->listSize;j++){
+            temp2=temp1->next;
+            if(temp2->data1<temp1->data1){
+                data1=temp1->data1;
+                data2=temp1->data2;
+                temp1->data1=temp2->data1;
+                temp1->data2=temp2->data2;
+                temp2->data1=data1;
+                temp2->data2=data2;
+            }
+        }
+        lista->curr=lista->curr->next;
+        lista->pos++;
+    }
+}
 
 /*****
 * tNodo* remove2
@@ -182,21 +206,23 @@ int insert_nodo(tLista*lista,tNodo* nodo){
 *****/
 tNodo* remove2(tLista* lista,int data1){
     move_to_head(lista);
-    tNodo* temp = lista->curr;
-    if (lista->head->data1==data1){
-        lista->head=temp->next;
-        lista->listSize--;
-        return temp;
-    }
     tNodo* prev;
-    while(temp!=NULL && temp->data1!=data1){
-        prev=temp;
-        temp=temp->next;
+    if(lista==NULL){
+        return NULL;
+    }
+    if (lista->head->data1==data1){
+        lista->head=lista->curr->next;
+        lista->listSize--;
+        return lista->curr;
+    }
+    while(lista->curr!=NULL && lista->curr->data1!=data1){
+        prev=lista->curr;
+        lista->curr=lista->curr->next;
     }
     //queremos borrar temp->next
-    prev->next=temp->next;
+    prev->next=lista->curr->next;
     lista->listSize--;
-    return temp;
+    return lista->curr;
 }
 
 /*****
@@ -211,14 +237,25 @@ tNodo* remove2(tLista* lista,int data1){
 * void : no retorna nada
 *****/
 void printlista(tLista* lista){
-    move_to_head(lista);
-    int i=0;
-    while(i<lista->listSize){
-        printf("%d %d %d\n", i, lista->curr->data1, lista->curr->data2);
-        lista->curr=lista->curr->next;
-        i++;
+  move_to_head(lista);
+  int i=0, posI=lista->pos;
+  while(i<lista->listSize){
+    printf("%d %d %d\n", i, lista->curr->data1, lista->curr->data2);
+    if(lista->curr->next==NULL){
+        return;
     }
+    lista->curr=lista->curr->next;
+    i++;
+  }
+  move_to_pos(lista,posI);
+}
+void move_to_pos(tLista* lista, int pos){
     move_to_head(lista);
+    lista->pos=0;
+    for(int i=0; i<=pos; i++){
+        lista->curr=lista->curr->next;
+        lista->pos++;
+    }
 }
 
 /*****
@@ -319,47 +356,44 @@ int search(tLista* lista, int dato){
 * La funcion es void, no retorna nada
 *****/
 void free2(tLista* listaD, tLista* listaU, int byte, FILE* fp){
-    tNodo* aux=remove2(listaU, byte);
-    int bytes = aux->data2 - aux->data1;
+    tNodo* aux=remove2(listaU, byte); //Remueve el nodo de la lista de usados
+    tNodo* removed;
+    if(aux==NULL){
+        printf("nodo no existe\n"); //Comprueba si se extrajo un nodo valido
+        return;
+    }
+    int bytes = aux->data2 - aux->data1; //cantidad de bytes liberados
     move_to_head(listaD);
-    while (listaD->curr->data2 < aux->data1){
-        move_next(listaD);
-    }
-    if (listaD->pos==0){
-        if (aux->data2 == listaD->curr->data1-1){
-            listaD->curr->data1 = aux->data1;
-        }
-        else{
-            move_to_head(listaD);
-            insert_nodo(listaD, aux);
-        }
-    }
-    else if (listaD->pos==listaD->listSize){
-        if (aux->data1==listaD->curr->data2+1){
-            listaD->curr->data2=aux->data2;
-        }
-        else{
-            insert_nodo(listaD,aux);
-        }
-    }
-    else{
-        if (aux->data1==listaD->curr->data2+1){
-            listaD->curr->data2=aux->data2;
-            if (listaD->curr->data2==listaD->curr->next->data1-1){
-                listaD->curr->data2 = listaD->curr->next->data1;
+    if(listaD->listSize>0){
+        if (aux->data1 > listaD->curr->data2){
+            while (listaD->curr->next->data1 < aux->data1){
+                move_next(listaD); //se mueve hasta el nodo "anterior" al espacio donde hay que insertar el nodo nuevo en la lista disponible
             }
         }
-        else if (aux->data2==listaD->curr->next->data1-1){
-            listaD->curr->next->data1=aux->data1;
+    }
+    if(aux->data1!=0 && aux->data2!=0){
+        insert_nodo(listaD, aux);
+    }
+    sort(listaD);
+    move_to_head(listaD);
+    while(listaD->curr != NULL){
+        if(listaD->curr->next!=NULL){
+            if (listaD->curr->data2 == listaD->curr->next->data1-1){
+                listaD->curr->data2 = listaD->curr->next->data2;
+                removed = remove2(listaD, listaD->curr->next->data1);
+                free(removed);
+                move_to_head(listaD);
+            }
+            else{
+                move_next(listaD);
+            }
         }
-        else{
-            move_next(listaD);
-            insert_nodo(listaD,aux);
+        else if(listaD->curr->next==NULL){
+            break;
         }
     }
-    fprintf(fp, "Bloque de %d bytes liberado\n", bytes);
+    fprintf(fp, "Bloque de %d bytes liberado\n", bytes+1);
 }
-
 /*****
 * int malloc2
 ******
@@ -376,12 +410,13 @@ void free2(tLista* listaD, tLista* listaU, int byte, FILE* fp){
 int malloc2(tLista* listaD, tLista* listaU, int bytesize, FILE* fp){
     int aval, inicio;
     move_to_head(listaD);
-    while(listaD->pos<listaD->listSize){
+    while(listaD->pos < listaD->listSize){
         aval = listaD->curr->data2 - listaD->curr->data1+1; //Calcula el espacio disponible
         if(aval >= bytesize){
             tNodo* aux2=(tNodo*)malloc(sizeof(tNodo));
             inicio = listaD->curr->data1;
-            initNodo(aux2,inicio,inicio+bytesize);
+            initNodo(aux2,inicio,inicio+bytesize-1);
+            move_to_head(listaU);
             insert_nodo(listaU, aux2); //Fijarse como funcionaba el insert. || Esto lo añade a la lista 2.
             fprintf(fp, "Bloque de %i bytes asignado a partir del byte %i\n", bytesize, listaD->curr->data1);
             listaD->curr->data1 = inicio + bytesize; //Cambia el tamaño del nodo en la lista 1.
@@ -390,7 +425,9 @@ int malloc2(tLista* listaD, tLista* listaU, int bytesize, FILE* fp){
             }
             return 1;
         }
-        move_next(listaD);
+        else{
+            move_next(listaD);
+        }
     }
     fprintf(fp, "Bloque de %d bytes NO puede ser asignado\n", bytesize);
     return 0;
