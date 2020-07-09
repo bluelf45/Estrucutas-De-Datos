@@ -32,6 +32,8 @@ int insert_nodo(tLista*lista,tNodo* nodo);
 
 tNodo* remove2(tLista* lista,int data1);
 
+void move_to_pos(tLista* lista, int pos);
+
 void printlista(tLista* lista);
 
 void move_to_head(tLista* lista);
@@ -42,9 +44,13 @@ void clear(tLista* lista);//eliminar la lista
 
 int search(tLista* lista, int dato);
 
+void verificador(tLista* lista, tNodo* aux);
+
 void free2(tLista* listaD, tLista* listaU, int byte,  FILE* fp);
 
 int malloc2(tLista* listaD, tLista* listaU, int bytesize, FILE* fp);
+
+void comprobar(tLista* lista);
 
 int tamLista(tLista* lista);
 
