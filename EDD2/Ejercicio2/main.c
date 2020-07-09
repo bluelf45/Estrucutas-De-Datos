@@ -2,6 +2,18 @@
 #include <stdlib.h>
 #include <string.h>
 #include "TDArbol.h"
+/*****
+* int main
+******
+* lee el archivo input.txt y lee linea por linea leyendo la  frase y el numero, para saber que funcion tendria que hacer
+******
+* Input:
+* vacio
+* .......
+******
+* Returns:
+* 0 si se logro, 1 si el archivo no existe
+*****/
 int main(){
     int u, numero;
     FILE*  fp;
