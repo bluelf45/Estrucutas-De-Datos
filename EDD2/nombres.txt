@@ -1,6 +1,9 @@
-Juan Pablo Cassis Oyanadel, 201973519-5, 200, (Pregunta 1) programe las funciones main, free2, contarBytes e initNodo. Ademas, ayude a la hora de arreglar los warnings que aparecieran luego de elaborar las funciones y el programa en si.
-(Pregunta 2)
-Bastian guiso (pregunta 1)
-(pregunta 2)
-osakar (pregunta 1)
+Juan Pablo Cassis Oyanadel, 201973519-5, 200, 
+	(Pregunta 1) programe las funciones main, free2, contarBytes e initNodo. Ademas, ayude a la hora de arreglar los warnings que aparecieran luego de elaborar las 	funciones y el programa en si.
+	(Pregunta 2)
+Bastian guiso
+	(pregunta 1)
+	(pregunta 2)
+Oscar Acevedo 201973567-5, 200. 
+	(pregunta 1) Hice move_next, initList, initNodo, anterior, insert_nodo, remove2, move_to_pos, move_to_head, clear y el TDAlista.h
 	(pregunta 2)
