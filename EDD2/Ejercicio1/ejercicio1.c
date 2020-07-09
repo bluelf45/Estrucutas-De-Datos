@@ -19,7 +19,7 @@
 
 int main(){
     FILE* fp;
-    fp = fopen("input1.dat","r");
+    fp = fopen("input1.DAT","r");
     if (fp==NULL){
         printf("Error al abrir archivo");
         exit(1);
@@ -35,14 +35,15 @@ int main(){
     tNodo* nodoX=(tNodo*)malloc(sizeof(tNodo));
     initNodo(nodoX, 1, M);
     insert_nodo(listaD, nodoX);
-    FILE* fm = fopen("output.dat","w");
+    FILE* fm = fopen("output1.DAT","w");
     for (int i = 0; i < N; i++){
         fscanf(fp, "%s %d", mf, &cant);
-        if (strcmp(mf,"free")==0){
-            free2(listaD, listaU, cant, fm);
-        }
+        printf("%s,%d ", mf, cant);
         if (strcmp(mf,"malloc")==0){
             malloc2(listaD, listaU, cant, fm);
+        }
+        if (strcmp(mf,"free")==0){
+            free2(listaD, listaU, cant, fm);
         }
     }
     int bytes=contarBytes(listaU);
