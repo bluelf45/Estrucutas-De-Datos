@@ -5,14 +5,13 @@ int i;
 /*****
 * void initArbol
 ******
-* inicia un arbol vacio
+* Inicia un arbol vacio
 ******
 * Input:
-* arbolBin* arbol : puntero a un arbolBin para iniciar.
-* .......
+* arbolBin* arbol : Puntero a un arbolBin para iniciar.
 ******
 * Returns:
-* nada, es void
+* Nada, es void
 *****/
 void initArbol(arbolBin* arbol){
     arbol->raiz=NULL;
@@ -21,15 +20,14 @@ void initArbol(arbolBin* arbol){
 /*****
 * void initNodo
 ******
-* inicia un nodo con dato el item dado
+* Inicia un nodo con dato el item dado
 ******
 * Input:
-* tNodo* nodo : puntero al nodo a inciar;
-*int item : dato que quieres que tenga el nodo
-* .......
+* tNodo* nodo : Puntero al nodo a inciar.
+* int item : Dato a insertar en el nodo.
 ******
 * Returns:
-* nada, es void
+* Nada, es void
 *****/
 
 void initNodo(tNodo* nodo, int item){
@@ -39,14 +37,13 @@ void initNodo(tNodo* nodo, int item){
 /*****
 * void clearHelp
 ******
-* funcion usada para liberar un arbol entero, es usada para ayudar clear
+* Funcion usada para liberar un arbol entero, es usada para ayudar clear.
 ******
 * Input:
-* tNodo* nodo : primero es la raiz del arbol y funciona recursivamente liberando todos los nodos
-* .......
+* tNodo* nodo : Primero es la raiz del arbol y funciona recursivamente liberando todos los nodos.
 ******
 * Returns:
-* nada, es void
+* Nada, es void
 *****/
 void clearHelp(tNodo* nodo){
     if(nodo==NULL){
@@ -59,14 +56,13 @@ void clearHelp(tNodo* nodo){
 /*****
 * void clear
 ******
-* liberar un arbol dado
+* Liberar un arbol dado.
 ******
 * Input:
-* arbolBin* arbol : arbol para liberar/limpiar
-* .......
+* arbolBin* arbol : Arbol para liberar/limpiar.
 ******
 * Returns:
-* nada, es void
+* Nada, es void.
 *****/
 void clear(arbolBin* arbol){
     if (arbol->raiz==NULL){
@@ -79,13 +75,13 @@ void clear(arbolBin* arbol){
 /*****
 * tNodo* encontrarMax
 ******
-* Se mueve al extremo derecho del arbol para retornar el numero maximo
+* Se mueve al extremo derecho del arbol para retornar el numero maximo.
 ******
 * Input:
-* tNodo* nodo: Nodo raiz del arbol
+* tNodo* nodo: Nodo raiz del arbol.
 ******
 * Returns:
-* tNodo*: retorna el nodo contenedor del numero maximo.
+* tNodo*: Retorna el nodo contenedor del numero maximo.
 *****/
 tNodo* encontrarMax(tNodo* nodo){
     while(nodo->right != NULL){
@@ -96,15 +92,14 @@ tNodo* encontrarMax(tNodo* nodo){
 /*****
 * void borrarHelp
 ******
-* ayuda a encontrar el nodo deseado en borrar y lo remueve del arbol
+* Ayuda a encontrar el nodo deseado en borrar y lo remueve del arbol.
 ******
 * Input:
-* tNodo* nodo : primero es la raiz del arbol, luego es recursiva tomando todos los nodos hasta encontrar el nodo deseado
-* int item : dato del nodo a eliminar
-* .......
+* tNodo* nodo : Primero es la raiz del arbol, luego es recursiva tomando todos los nodos hasta encontrar el nodo deseado.
+* int item : Dato del nodo a eliminar.
 ******
 * Returns:
-* tNodo* :  nodo eliminado del arbol
+* tNodo* :  Nodo eliminado del arbol.
 *****/
 tNodo* borrarHelp(tNodo* nodo, int item){
     if(nodo == NULL){
@@ -146,12 +141,11 @@ tNodo* borrarHelp(tNodo* nodo, int item){
 /*****
 * int Borrar
 ******
-* Borra cierto item del ABB arbol
+* Borra cierto item del ABB arbol.
 ******
 * Input:
-* arbolBin* arbol : el arbol al que le quieres borrar algo
-* int item : item que deseas eliminar del arbol
-* .......
+* arbolBin* arbol : Puntero al arbol al que le quieres borrar algo.
+* int item : Dato del nodo que se desea eliminar.
 ******
 * Returns:
 * int: Retorna 0 si no se logro o 1 si se hizo correctamente.
@@ -166,15 +160,16 @@ int Borrar(arbolBin* arbol, int item){
         return 1;
     }
 }
+
 /*****
 * void sucesor
 ******
-* Revisa si el item que le damos es mayor a cualquier elemento del arbol, y luego usa sucesorHelp
+* Revisa si el item que le damos es mayor a cualquier elemento del arbol, y luego usa sucesorHelp.
 ******
 * Input:
-* arbolBin* arbol: struct arbol sobre el cual se trabaja
-* int item: numero entero al cual le estamos buscando el sucesor
-* int u: cota superior del arbol y de los elementos a los que se les busca el sucesor
+* arbolBin* arbol: Struct arbol sobre el cual se trabaja.
+* int item: Numero entero al cual le estamos buscando el sucesor.
+* int u: Cota superior del arbol y de los elementos a los que se les busca el sucesor.
 ******
 * Returns:
 * void: No retorna nada, hace print.
@@ -197,11 +192,11 @@ void Sucesor(arbolBin* arbol, int item, int u){
 * Se encarga de hacer el proceso donde se busca el sucesor de cierto numero en el arbol, con un recorrido in orden.
 ******
 * Input:
-* tNodo* nodo: nodo raiz del arbol.
-* int item: numero al cual se le busca sucesor
+* tNodo* nodo: Nodo raiz del arbol.
+* int item: Numero al cual se le busca sucesor.
 ******
 * Returns:
-* void: no retorna nada, hace return para salir de la recursividad
+* void: no retorna nada, hace return para salir de la recursividad.
 *****/
 void sucesorHelp(tNodo* nodo, int item){
     if (nodo == NULL){
@@ -219,15 +214,14 @@ void sucesorHelp(tNodo* nodo, int item){
 /*****
 * int insertHelp
 ******
-* funcion recursiva, parte desde la raiz hasta encontrar la posicion adecuda para insertar el nodo de dato item
+* Funcion recursiva, parte desde la raiz hasta encontrar la posicion adecuda para insertar el nodo de dato item.
 ******
 * Input:
-* tNodo* nodo : primero es la raiz del arbol, se usa para poder encontrar donde insertar el nodo
-* int item : item del nodo a insertar
-* .......
+* tNodo* nodo : Primero es la raiz del arbol, se usa para poder encontrar donde insertar el nodo
+* int item : Item del nodo a insertar.
 ******
 * Returns:
-* int  : 1 si se logro y 0 si no se pudo
+* int  : 1 si se logro y 0 si no se pudo.
 *****/
 int insertHelp(tNodo* nodo, int item){
     if(nodo->dato==item){
@@ -260,15 +254,14 @@ int insertHelp(tNodo* nodo, int item){
 /*****
 * void insertar
 ******
-* funcion que usa insertHelp para poder insertar un nodo en el arbol
+* Funcion que usa insertHelp para poder insertar un nodo en el arbol.
 ******
 * Input:
-* arbolBin* arbol : arbol al que le quieres insertar un nodo
-* int item : item del nodo que quieres insertar
-* .......
+* arbolBin* arbol : Arbol al que se quiere insertar un nodo.
+* int item : Item del nodo se quiere insertar.
 ******
 * Returns:
-* void no retorna
+* void: No retorna nada.
 *****/
 void insertar(arbolBin* arbol, int item){
     if(arbol->raiz==NULL){
@@ -286,14 +279,13 @@ void insertar(arbolBin* arbol, int item){
 /*****
 * void printPreNodo
 ******
-* funcion recursiva para printear el arbon en preorden
+* Funcion recursiva para printear el arbon en preorden.
 ******
 * Input:
-* tNodo* nodo : funcion recursiva, primer nodo es la raiz
-* .......
+* tNodo* nodo : Funcion recursiva, primer nodo es la raiz.
 ******
 * Returns:
-* void: no retorna nada.
+* void: No retorna nada.
 *****/
 void printPreNodo(tNodo* nodo){
     if(nodo==NULL){
@@ -306,14 +298,13 @@ void printPreNodo(tNodo* nodo){
 /*****
 * void preorden
 ******
-* printear un arbol en preorden
+* Printear un arbol en preorden.
 ******
 * Input:
-* arbolBin* arbol : arbol a printear
-* .......
+* arbolBin* arbol : Arbol a printear.
 ******
 * Returns:
-* void: no retorna nada.
+* void: No retorna nada.
 *****/
 void preorden(arbolBin* arbol){
     printPreNodo(arbol->raiz);
