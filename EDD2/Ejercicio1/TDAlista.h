@@ -32,11 +32,7 @@ tNodo* remove2(tLista* lista,int data1);
 
 void move_to_pos(tLista* lista, int pos);
 
-void printlista(tLista* lista);
-
 void move_to_head(tLista* lista);
-
-void move_to_tail(tLista* lista);
 
 void clear(tLista* lista);//eliminar la lista
 
