@@ -6,4 +6,4 @@ Bastian guiso
 	(pregunta 2)
 Oscar Acevedo 201973567-5, 200. 
 	(pregunta 1) Hice move_next, initList, initNodo, anterior, insert_nodo, remove2, move_to_pos, move_to_head, clear y el TDAlista.h
-	(pregunta 2)
+	(pregunta 2) Main, initArbol, initNodo, clearHelp, clear, insertHelp, insertar, printPreNodo, prenodo
