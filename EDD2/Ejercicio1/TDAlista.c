@@ -107,29 +107,6 @@ void anterior(tLista* lista){
 }
 
 /*****
-* void push
-******
-* Inserta un nodo en la cabeza de la lista.
-******
-* Input:
-* tLista* lista = Espacio de memoria de una lista.
-* int data1=byte Inicio del nodo al que queremos insertar.
-* int data2=byte Final del nodo al que queremos insertar.
-******
-* Returns:
-* void: No retorna nada.
-*****/
-void push(tLista* lista,int data1,int data2){
-    move_to_head(lista);
-    tNodo* nodo=(tNodo*)malloc(sizeof(tNodo));
-    nodo->data1=data1;
-    nodo->data2=data2;
-    nodo->next=lista->head;
-    lista->head=nodo;
-    lista->listSize++;
-}
-
-/*****
 * int insert_nodo
 ******
 * Inserta un nodo en la posicion actual en la lista.
