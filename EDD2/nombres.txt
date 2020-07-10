@@ -1,9 +1,9 @@
-Juan Pablo Cassis Oyanadel, 201973519-5, 200, 
-	(Pregunta 1) programe las funciones main, free2, contarBytes e initNodo. Ademas, ayude a la hora de arreglar los warnings que aparecieran luego de elaborar las 	funciones y el programa en si.
+Juan Pablo Cassis Oyanadel, 201973519-5, 200.
+	(Pregunta 1) Programe las funciones main, free2, contarBytes e initNodo. Ademas, ayude a la hora de arreglar los warnings que aparecieran luego de elaborar las 	funciones y el programa en si.
 	(Pregunta 2) Hice las funciones encontrarMax, Sucesor, sucesorHelp. Ademas ayude a arreglar los problemas que existiesen en el codigo en general.
-Bastian guiso
-	(pregunta 1)
-	(pregunta 2)
+Bastian Kretschmer 201973588-8, 200.
+	(pregunta 1) Cree la funcion malloc2, y ayude a crear el main y a debuguear los casos de prueba.
+	(pregunta 2) Hice la funcion borra, borrar help y ayude a debuguar los casos de prueba.
 Oscar Acevedo 201973567-5, 200. 
 	(pregunta 1) Hice move_next, initList, initNodo, anterior, insert_nodo, remove2, move_to_pos, move_to_head, clear y el TDAlista.h
 	(pregunta 2) Main, initArbol, initNodo, clearHelp, clear, insertHelp, insertar, printPreNodo, prenodo
