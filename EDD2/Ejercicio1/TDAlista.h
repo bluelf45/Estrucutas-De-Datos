@@ -26,8 +26,6 @@ void initNodo(tNodo* nodo, int dato1, int dato2);
 
 void anterior(tLista* lista);
 
-void push(tLista* lista,int data1,int data2);
-
 int insert_nodo(tLista*lista,tNodo* nodo);
 
 tNodo* remove2(tLista* lista,int data1);
