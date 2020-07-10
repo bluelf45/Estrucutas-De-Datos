@@ -5,7 +5,7 @@ int i;
 /*****
 * void initArbol
 ******
-* Inicia un arbol vacio
+* Inicia un arbol vacio.
 ******
 * Input:
 * arbolBin* arbol : Puntero a un arbolBin para iniciar.
@@ -20,7 +20,7 @@ void initArbol(arbolBin* arbol){
 /*****
 * void initNodo
 ******
-* Inicia un nodo con dato el item dado
+* Inicia un nodo con el item dado.
 ******
 * Input:
 * tNodo* nodo : Puntero al nodo a inciar.
@@ -37,7 +37,7 @@ void initNodo(tNodo* nodo, int item){
 /*****
 * void clearHelp
 ******
-* Funcion usada para liberar un arbol entero, es usada para ayudar clear.
+* Funcion usada para liberar un arbol entero, es usada para ayudar a clear.
 ******
 * Input:
 * tNodo* nodo : Primero es la raiz del arbol y funciona recursivamente liberando todos los nodos.
