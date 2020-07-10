@@ -135,8 +135,8 @@ void push(tLista* lista,int data1,int data2){
 * Inserta un nodo en la posicion actual en la lista.
 ******
 * Input:
-* tLista* lista : Lista a la que le queremos insertar un nodo
-* tNodo* nodo : Nodo que queremos insertar
+* tLista* lista : Lista a la que le queremos insertar un nodo.
+* tNodo* nodo : Nodo que queremos insertar.
 ******
 * Returns:
 * int: Retorna 0 ocurre un error y retorna 1 si se hizo correctamente.
@@ -332,7 +332,7 @@ void clear(tLista* lista){
 * Busca el nodo que tenga como data1 a el valor dato.
 ******
 * Input:
-* tLista* lista: Lista enlazada
+* tLista* lista: Lista enlazada.
 * int dato : Dato que es el byte de incio
 ******
 * Returns:
@@ -414,7 +414,7 @@ void free2(tLista* listaD, tLista* listaU, int byte, FILE* fp){
 * Esta funcion asigna nodos de memoria de tamaño "bytesize" a la lista 2, y reduce el tamaño
 * de un nodo de la lista 1 si es que existen espacio disponible.
 * Input:
-* tLista* ListaD: Puntero a la lista de disponible.
+* tLista* ListaD: Puntero a la lista de memoria disponible.
 * tLista* ListaU: Puntero a la lista de memoria usada.
 * int bytesize: Entero que entrega el tamaño del bloque a asignar.
 ******
