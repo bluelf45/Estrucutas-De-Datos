@@ -203,31 +203,6 @@ tNodo* remove2(tLista* lista,int data1){
 }
 
 /*****
-* void printlista
-******
-* Imprime la lista y luego te deja en la cabeza de la lista.
-******
-* Input:
-* tLista* lista : Puntero a una lista enlazada.
-******
-* Returns:
-* void : no retorna nada
-*****/
-void printlista(tLista* lista){
-    move_to_head(lista);
-    int i=0, posI=lista->pos;
-    while(i<lista->listSize){
-        printf("%d %d %d\n", i, lista->curr->data1, lista->curr->data2);
-        if(lista->curr->next==NULL){
-            return;
-        }
-        lista->curr=lista->curr->next;
-        i++;
-    }
-    move_to_pos(lista,posI);
-}
-
-/*****
 * void move_to_pos
 ******
 * Mueve el curr a la posicion deseada
@@ -262,22 +237,6 @@ void move_to_pos(tLista* lista, int pos){
 void move_to_head(tLista* lista){
     lista->curr=lista->head;
     lista->pos=0;
-}
-
-/*****
-* void move_to_tail
-******
-* Mueve curr a la cola de la lista.
-******
-* Input:
-* tLista* lista : Puntero a una lista enlazada.
-******
-* Returns:
-* void: No retorna nada
-*****/
-void move_to_tail(tLista* lista){
-    lista->curr=lista->tail;
-    lista->pos=lista->listSize-1;
 }
 
 /*****
