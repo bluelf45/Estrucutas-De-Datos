@@ -120,13 +120,13 @@ void anterior(tLista* lista){
 * void: No retorna nada.
 *****/
 void push(tLista* lista,int data1,int data2){
-  move_to_head(lista);
-  tNodo* nodo=(tNodo*)malloc(sizeof(tNodo));
-  nodo->data1=data1;
-  nodo->data2=data2;
-  nodo->next=lista->head;
-  lista->head=nodo;
-  lista->listSize++;
+    move_to_head(lista);
+    tNodo* nodo=(tNodo*)malloc(sizeof(tNodo));
+    nodo->data1=data1;
+    nodo->data2=data2;
+    nodo->next=lista->head;
+    lista->head=nodo;
+    lista->listSize++;
 }
 
 /*****
@@ -231,24 +231,37 @@ tNodo* remove2(tLista* lista,int data1){
 * Imprime la lista y luego te deja en la cabeza de la lista.
 ******
 * Input:
-* tLista lista : Puntero a una lista enlazada.
+* tLista* lista : Puntero a una lista enlazada.
 ******
 * Returns:
 * void : no retorna nada
 *****/
 void printlista(tLista* lista){
-  move_to_head(lista);
-  int i=0, posI=lista->pos;
-  while(i<lista->listSize){
-    printf("%d %d %d\n", i, lista->curr->data1, lista->curr->data2);
-    if(lista->curr->next==NULL){
-        return;
+    move_to_head(lista);
+    int i=0, posI=lista->pos;
+    while(i<lista->listSize){
+        printf("%d %d %d\n", i, lista->curr->data1, lista->curr->data2);
+        if(lista->curr->next==NULL){
+            return;
+        }
+        lista->curr=lista->curr->next;
+        i++;
     }
-    lista->curr=lista->curr->next;
-    i++;
-  }
-  move_to_pos(lista,posI);
+    move_to_pos(lista,posI);
 }
+
+/*****
+* void move_to_pos
+******
+* Mueve el curr a la posicion deseada
+******
+* Input:
+* tLista* lista : Puntero a una lista enlazada.
+* int pos : Posicion a la cual queremos mover el curr.
+******
+* Returns:
+* void : no retorna nada
+*****/
 void move_to_pos(tLista* lista, int pos){
     move_to_head(lista);
     lista->pos=0;
@@ -351,6 +364,7 @@ int search(tLista* lista, int dato){
 * tLista* listaD: Lista enlazada del espacio disponible en la memoria
 * tLista* listaU: Lista enlazada del espacio utilizado en la memoria
 * int byte: byte donde comienza el bloque que se quiere liberar
+* FILE* fp: Archivo en el cual se imprime el resultado.
 ******
 * Returns:
 * La funcion es void, no retorna nada
@@ -447,25 +461,4 @@ int malloc2(tLista* listaD, tLista* listaU, int bytesize, FILE* fp){
 *****/
 int tamLista(tLista* lista){
     return lista->listSize;
-}
-
-/*****
-* TipoFunción NombreFunción
-******
-* Resumen Función
-******
-* Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
-* .......
-******
-* Returns:
-* TipoRetorno, Descripción retorno
-*****/
-int bytesLib(tLista* lista){
-    int count = 0;
-    for (int i = 0; i < tamLista(lista); i++){
-        count += lista->curr->data2 - lista->curr->data1;
-        move_next(lista);
-    }
-    return count;
 }

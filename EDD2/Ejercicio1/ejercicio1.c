@@ -38,7 +38,6 @@ int main(){
     FILE* fm = fopen("output1.DAT","w");
     for (int i = 0; i < N; i++){
         fscanf(fp, "%s %d", mf, &cant);
-        printf("%s,%d ", mf, cant);
         if (strcmp(mf,"malloc")==0){
             malloc2(listaD, listaU, cant, fm);
         }

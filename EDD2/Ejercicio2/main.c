@@ -8,7 +8,7 @@
 * lee el archivo input.txt y lee linea por linea leyendo la  frase y el numero, para saber que funcion tendria que hacer
 ******
 * Input:
-* vacio
+* No tiene.
 * .......
 ******
 * Returns:

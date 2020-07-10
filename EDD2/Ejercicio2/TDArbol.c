@@ -77,16 +77,15 @@ void clear(arbolBin* arbol){
     arbol->nElems=0;
 }
 /*****
-* 
+* tNodo* encontrarMax
 ******
-* 
+* Se mueve al extremo derecho del arbol para retornar el numero maximo
 ******
 * Input:
-* 
-* .......
+* tNodo* nodo: Nodo raiz del arbol
 ******
 * Returns:
-* 
+* tNodo*: retorna el nodo contenedor del numero maximo.
 *****/
 tNodo* encontrarMax(tNodo* nodo){
     while(nodo->right != NULL){
@@ -158,7 +157,6 @@ tNodo* borrarHelp(tNodo* nodo, int item){
 * int: Retorna 0 si no se logro o 1 si se hizo correctamente.
 *****/
 int Borrar(arbolBin* arbol, int item){
-
     if(arbol->raiz == NULL){
         return 0;
     }
@@ -171,14 +169,15 @@ int Borrar(arbolBin* arbol, int item){
 /*****
 * void sucesor
 ******
-* 
+* Revisa si el item que le damos es mayor a cualquier elemento del arbol, y luego usa sucesorHelp
 ******
 * Input:
-* 
-* .......
+* arbolBin* arbol: struct arbol sobre el cual se trabaja
+* int item: numero entero al cual le estamos buscando el sucesor
+* int u: cota superior del arbol y de los elementos a los que se les busca el sucesor
 ******
 * Returns:
-* 
+* void: No retorna nada, hace print.
 *****/
 void Sucesor(arbolBin* arbol, int item, int u){
     i = 0;
@@ -193,16 +192,16 @@ void Sucesor(arbolBin* arbol, int item, int u){
     sucesorHelp(arbol->raiz, item);
 }
 /*****
-* int move_next
+* void sucesorHelp
 ******
-* mueve lista->curr a la siguiente posicion, es decr, al siguiente nodo en la lista dada.
+* Se encarga de hacer el proceso donde se busca el sucesor de cierto numero en el arbol, con un recorrido in orden.
 ******
 * Input:
-* tLista* lista : Lista que queremos cambiar de posicion.
-* .......
+* tNodo* nodo: nodo raiz del arbol.
+* int item: numero al cual se le busca sucesor
 ******
 * Returns:
-* int: Retorna 0 si no se logro, o si esta en la cabeza de la lista. Sino retorna 1 diciendo que se hizo correctamente.
+* void: no retorna nada, hace return para salir de la recursividad
 *****/
 void sucesorHelp(tNodo* nodo, int item){
     if (nodo == NULL){
@@ -218,9 +217,9 @@ void sucesorHelp(tNodo* nodo, int item){
 
 }
 /*****
-* insertHelp
+* int insertHelp
 ******
-* funcion recursiva
+* funcion recursiva, parte desde la raiz hasta encontrar la posicion adecuda para insertar el nodo de dato item
 ******
 * Input:
 * tNodo* nodo : primero es la raiz del arbol, se usa para poder encontrar donde insertar el nodo
@@ -259,7 +258,7 @@ int insertHelp(tNodo* nodo, int item){
     return 0;
 }
 /*****
-* int move_next
+* void insertar
 ******
 * funcion que usa insertHelp para poder insertar un nodo en el arbol
 ******
@@ -276,9 +275,12 @@ void insertar(arbolBin* arbol, int item){
         tNodo* NewNode=(tNodo*)malloc(sizeof(tNodo));
         initNodo(NewNode, item);
         arbol->raiz=NewNode;
+        arbol->nElems++;
+        return;
     }
     else if(insertHelp(arbol->raiz,item)==1){
         arbol->nElems++;
+        return;
     }
 }
 /*****
@@ -291,7 +293,7 @@ void insertar(arbolBin* arbol, int item){
 * .......
 ******
 * Returns:
-* vacio
+* void: no retorna nada.
 *****/
 void printPreNodo(tNodo* nodo){
     if(nodo==NULL){
@@ -311,7 +313,7 @@ void printPreNodo(tNodo* nodo){
 * .......
 ******
 * Returns:
-* void
+* void: no retorna nada.
 *****/
 void preorden(arbolBin* arbol){
     printPreNodo(arbol->raiz);
