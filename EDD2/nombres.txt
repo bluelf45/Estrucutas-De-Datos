@@ -1,6 +1,6 @@
 Juan Pablo Cassis Oyanadel, 201973519-5, 200, 
 	(Pregunta 1) programe las funciones main, free2, contarBytes e initNodo. Ademas, ayude a la hora de arreglar los warnings que aparecieran luego de elaborar las 	funciones y el programa en si.
-	(Pregunta 2)
+	(Pregunta 2) Hice las funciones encontrarMax, Sucesor, sucesorHelp. Ademas ayude a arreglar los problemas que existiesen en el codigo en general.
 Bastian guiso
 	(pregunta 1)
 	(pregunta 2)
