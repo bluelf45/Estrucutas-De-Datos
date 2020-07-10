@@ -4,6 +4,7 @@
 //lista1 memoria disponible
 //lista2 memoria usada
 tNodo* centinela;
+
 /*****
 * int move_next
 ******
@@ -390,7 +391,6 @@ int malloc2(tLista* listaD, tLista* listaU, int bytesize, FILE* fp){
 ******
 * Input:
 * tLista* lista : Puntero a una lista enlazada.
-* .......
 ******
 * Returns:
 * int: Retorna list->listSize, el cual es el tamaño de la lista.
