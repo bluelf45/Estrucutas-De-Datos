@@ -49,15 +49,66 @@ int SigPrimo(int n){
 }
 
 int main(){
-    int totalP, totalO;
-    FILE *produc=fopen("productos.dat","rb");
-    FILE *ofertas=fopen("ofertas.dat","rb");
-    if(ofertas==NULL || produc==NULL){
+    FILE *FileProduc=fopen("productos.dat","rb");
+    FILE *FileOfertasf=fopen("ofertas.dat","rb");
+    if(FileOfertas==NULL || FileProduc==NULL){
         printf("No existe un archivo\n");
         return 1;
     }
-    fread(&totalP,sizeof(int),1,produc);
-    fread(&totalO,sizeof(int),1,ofertas);
+    int totalP, totalO, i, j, codigo;
+    fread(&totalP,sizeof(int),1,FileProduc);
+    fread(&totalO,sizeof(int),1,FileOfertas);
+    int TamP=totalP/0.7;
+    int TamO=totalO/0.7;
+    struct slotP* HashProduc = initArray(TamP);
+    struct slotO* HashOfertas = initArray(TamO);
+
+    struct producto tempProduc;
+    struct oferta tempOfertas;
+
+    /*Leer el archivo de productos primero y los añade al array*/
+    i = 0;
+    while(i<totalP;i++){
+        fread(&tempProduc, sizeof(producto),1,FileProduc);
+        insert_producto(hashProduc,tempProduct);
+    }
+    i = 0;
+    /*Lo mismo pero al de ofertas*/
+    while(i<totalP;i++){
+        fread(&tempProduc, sizeof(oferta),1,FileOferta);
+        insert_oferta(hashOfertas,tempOfertas);
+    }
+    /*Empieza a hacer todo lo relacionado con compras.txt*/
+    FILE *FileCompras=fopen("compras.txt","rb");
+    if(FileCompras==NULL){
+        printf("El archivo compras.txt no existe");
+        return 1;
+    }
+
+    struct tcolaP heap = initColaP(); /*wat*/
+
+    char ranking, NumClientes, NumProductos, CodProduc;
+    fscanf(FileCompras, %d, &ranking);
+    fscanf(FileCompras, %d, &NumClientes);
+    i = 0;
+    while(i<=NumClientes; i++){
+        fscanf(FileCompras, %d, &NumProductos);
+        j = 0;
+        while(j<=NumProductos;j++){
+            fscanf(FileCompras, %d, &CodProduc);
+            codigo = search(HashProduc, CodProduc);
+        }
+    }
+
+
+
+    /*Aqui añadir las cosas para crear el archivo final*/
+
+
+
+    fclose(FileProduc);
+    fclose(FileOfertas);
+    fclose(FileCompras);
 
     return 0;
 }
