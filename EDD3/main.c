@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "hashingO.h"
+#include "hashingP.h"
+#include "TDAheap.h"
 
 #define VACIA -1
 
