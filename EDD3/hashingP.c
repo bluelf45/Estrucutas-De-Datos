@@ -3,7 +3,7 @@
 #include "hashingP.h"
 
 #define C1 3
-int Size=0;
+int SizeP=0;
 int Max_size;
 
 int get_id_P(producto produc){
@@ -28,7 +28,7 @@ slotP* initArrayProduc(int Tam){
     return arreglo;
 }
 
-int h1(int k, int M){
+int h1P(int k, int M){
     int hashVal;
     if (k == 0){
         return 0;
@@ -42,24 +42,24 @@ int h1(int k, int M){
     return hashVal;
 }
 
-int h2(int k, int i){
+int h2P(int k, int i){
     if (i==0) {
         return 0;
     }
     return C1*k*k;
 }
 
-int p(int k, int i){
-    return i*h2(k,i);
+int pP(int k, int i){
+    return i*h2P(k,i);
 }
 
-void insert_producto_P(slotP* arreglo, producto produc){
-    int index1=h1(produc.codigo_producto, Size);
+void insert_oferta(slotP* arreglo, producto produc){
+    int index1=h1P(produc.codigo_producto, SizeP);
     int pos=index1;
     if(arreglo[index1].key==-1){
         arreglo[index1].key=produc.codigo_producto;
         arreglo[index1].pro=produc;
-        Size++;
+        SizeP++;
     }
     else if (arreglo[index1].pro.codigo_producto==produc.codigo_producto)
     {
@@ -70,18 +70,18 @@ void insert_producto_P(slotP* arreglo, producto produc){
             if(arreglo[pos].key == produc.codigo_producto){
                 return;
             }
-            pos=(index1+p(produc.codigo_producto,i));
+            pos=(index1+pP(produc.codigo_producto,i));
         }
         arreglo[pos].key=produc.codigo_producto;
         arreglo[pos].pro=produc;
-        Size++;
+        SizeP++;
     }
 }
 
 int search_P(slotP* arreglo, int llave){
-    int index1=h1(llave, Size);
+    int index1=h1P(llave, SizeP);
     int pos=index1;
-    if (get_id(arreglo[index1].pro)==llave){
+    if (get_id_P(arreglo[index1].pro)==llave){
         return pos;
     }
     else{
@@ -89,7 +89,7 @@ int search_P(slotP* arreglo, int llave){
             if(arreglo[pos].key == llave){
                 return pos;
             }
-            pos=(index1+p(llave,i));
+            pos=(index1+pP(llave,i));
         }
     }
     printf("no se encontro el producto\n");

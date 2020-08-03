@@ -5,7 +5,7 @@
 
 tcolaP* initColaP(int i){
     tcolaP* cola=(tcolaP*)malloc(sizeof(tcolaP));
-    cola->array = (producto*)malloc(sizeof(producto)*(i+1));
+    cola->array = (producto2*)malloc(sizeof(producto2)*(i+1));
     cola->array[0].cont = -1;
     cola->len = i+1;
     cola->tot = 0;
@@ -17,7 +17,7 @@ void clearColaP(tcolaP* P){
     free(P);
 }
 
-producto encontrarMax(tcolaP* cola){
+producto2 encontrarMax(tcolaP* cola){
     return cola->array[0];
 }
 
@@ -26,7 +26,7 @@ int sizeColaP(tcolaP* cola){
 }
 
 void flotar(tcolaP* cola, int i){
-    producto j;
+    producto2 j;
     while (i>1 && cola->array[i].cont > cola->array[i/2].cont){
         j = cola->array[i];
         cola->array[i] = cola->array[i/2];
@@ -37,7 +37,7 @@ void flotar(tcolaP* cola, int i){
 
 void hundir(tcolaP* cola, int i){
     int max;
-    producto j;
+    producto2 j;
     while (2*i <= cola->len && (cola->array[i].cont < cola->array[2*i].cont || cola->array[i].cont < cola->array[2*i + 1].cont)){
         if (cola->array[2*i].cont > cola->array[2*i+1].cont){
             max = 2*i;
@@ -53,7 +53,7 @@ void hundir(tcolaP* cola, int i){
 
 }
 
-void insertarColaP(tcolaP* cola, producto x)
+void insertarColaP(tcolaP* cola, producto2 x)
 {
     cola->array[cola->tot+1] = x ;
     if (x.cont > cola->array[(cola->tot+1)/2].cont )
@@ -62,9 +62,9 @@ void insertarColaP(tcolaP* cola, producto x)
     }
 }
 
-producto removefirstColaP(tcolaP* p){
-    producto j = encontrarMax(p);
-    producto fin = p->array[p->tot + 1];
+producto2 removefirstColaP(tcolaP* p){
+    producto2 j = encontrarMax(p);
+    producto2 fin = p->array[p->tot + 1];
     p->array[1] = fin;
     p->tot-- ;
 

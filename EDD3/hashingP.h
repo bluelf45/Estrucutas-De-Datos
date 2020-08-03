@@ -1,6 +1,5 @@
 #ifndef HASHINGP
 #define HASHINGP
-#include <stdio.h>
 
 typedef struct {
     int  codigo_producto;
@@ -21,13 +20,13 @@ int get_precio_P(producto produc);
 
 slotP* initArrayProduc(int Tam);
 
-int h1(int k, int M);
+int h1P(int k, int M);
 
-int h2(int k, int i);
+int h2P(int k, int i);
 
-int p(int k, int i);
+int pP(int k, int i);
 
-void insert_producto_P(slotP* arreglo, producto produc);
+void insert_producto(slotP* arreglo, producto produc);
 
 int search_P(slotP* arreglo, int llave);
 

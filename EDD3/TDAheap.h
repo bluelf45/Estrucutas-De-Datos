@@ -1,13 +1,13 @@
-#ifndef HASHINGP
-#define HASHINGP
+#ifndef TDAHEAP
+#define TDAHEAP
 
 typedef struct {
     int codigo_producto;
     int cont;
-} producto;
+} producto2;
 
 typedef struct {
-    producto *array;
+    producto2 *array;
     int len;
     int tot;
 } tcolaP;
@@ -16,12 +16,12 @@ tcolaP* initColaP(int i);
 
 void clearColaP(tcolaP* P);
 
-producto encontrarMax(tcolaP* cola);
+producto2 encontrarMax(tcolaP* cola);
 
 void hundir(tcolaP* cola, int i);
 
-void insertarColaP(tcolaP* p, producto x);
+void insertarColaP(tcolaP* p, producto2 x);
 
-producto removefirstColaP(tcolaP* p);
+producto2 removefirstColaP(tcolaP* p);
 
 #endif

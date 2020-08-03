@@ -19,7 +19,7 @@ slotO* initArrayOfer(int Tam){
 }
 
 int get_id_O(oferta oferta){
-    return ofer.codigo_producto;
+    return oferta.codigo_producto;
 }
 
 int get_cant_desc_O(oferta ofer){
@@ -56,7 +56,7 @@ int p(int k, int i){
     return i*h2(k,i);
 }
 
-void insert_producto_O(slotO* arreglo, oferta ofer){
+void insert_producto(slotO* arreglo, oferta ofer){
     int index1=h1(ofer.codigo_producto, Size);
     int pos=index1;
     if(arreglo[index1].key==-1){
