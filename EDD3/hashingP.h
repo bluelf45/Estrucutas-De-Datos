@@ -12,11 +12,14 @@ typedef struct{
     producto pro;
 }slotP;
 
-int get_id_P(producto produc);
 
-char* get_name_P(producto* pro);
+int get_id_P(slotP slot);
 
-int get_precio_P(producto produc);
+producto get_pro(slotP slot);
+
+char* get_name_P(slotP *slot);
+
+int get_precio_P(slotP slot);
 
 slotP* initArrayProduc(int Tam);
 
@@ -30,5 +33,6 @@ void insert_producto(slotP* arreglo, producto produc);
 
 int search_P(slotP* arreglo, int llave);
 
+void clearHashP(slotP* arreglo);
 
 #endif

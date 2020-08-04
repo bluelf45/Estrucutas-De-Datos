@@ -82,3 +82,18 @@ int buscarHeap(tcolaP* cola, int codigo){
     }
     return 0;
 }
+producto2 creacionProduc(int cod, int cont, int cant, char* name){
+    producto2 producto;
+    producto.codigo_producto=cod;
+    producto.cont=cont;
+    producto.cantidad=cant;
+    producto.nombre=name;
+    return producto;
+}
+void sumarElemHeap(tcolaP* heap, int c, int cant, int cont){
+    heap->array[c].cantidad += cant;
+    heap->array[c].cont += cont;
+    if (heap->array[c].cont > heap->array[c/2].cont){
+        flotar(heap, c);
+    }
+}

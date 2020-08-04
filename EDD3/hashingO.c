@@ -4,30 +4,29 @@
 
 #define C1 3;
 
-int Size=0;
-int Max_size;
+int SizeO;
 
 
 //llenar el arreglo de slots vacios con key=-1 y el flag=0
 slotO* initArrayOfer(int Tam){
-    slotO* arreglo=(slotO*)malloc(sizeof(oferta)*Tam);
-    Max_size=Tam;
+    slotO* arreglo=(slotO*)malloc(sizeof(slotO)*Tam);
+    SizeO=Tam;
     for(int i=0; i<Tam; i++){
         arreglo[i].key=-1;
     }
     return arreglo;
 }
 
-int get_id_O(oferta oferta){
-    return oferta.codigo_producto;
+int get_id_O(slotO slot){
+    return slot.ofer.codigo_producto;
 }
 
-int get_cant_desc_O(oferta ofer){
-    return ofer.cantidad_descuento;
+int get_cant_desc_O(slotO slot){
+    return slot.ofer.cantidad_descuento;
 }
 
-int get_descuento_O(oferta ofer){
-    return ofer.monto_descuento;
+int get_descuento_O(slotO slot){
+    return slot.ofer.monto_descuento;
 }
 
 int h1(int k, int M){
@@ -56,13 +55,12 @@ int p(int k, int i){
     return i*h2(k,i);
 }
 
-void insert_producto(slotO* arreglo, oferta ofer){
-    int index1=h1(ofer.codigo_producto, Size);
+void insert_oferta(slotO* arreglo, oferta ofer){
+    int index1=h1(ofer.codigo_producto, SizeO);
     int pos=index1;
     if(arreglo[index1].key==-1){
         arreglo[index1].key=ofer.codigo_producto;
         arreglo[index1].ofer=ofer;
-        Size++;
     }
     else if (arreglo[index1].ofer.codigo_producto==ofer.codigo_producto)
     {
@@ -73,17 +71,16 @@ void insert_producto(slotO* arreglo, oferta ofer){
             if(arreglo[pos].key == ofer.codigo_producto){
                 return;
             }
-            pos=(index1+p(ofer.codigo_producto,i));
+            pos=(index1+p(ofer.codigo_producto,i))%SizeO;
         }
         arreglo[pos].key=ofer.codigo_producto;
         arreglo[pos].ofer=ofer;
-        Size++;
     }
 }
 
 
 int search_O(slotO* arreglo, int llave){
-    int index1=h1(llave, Size);
+    int index1=h1(llave, SizeO);
     if (arreglo[index1].ofer.codigo_producto==llave){
         return index1;
     }
@@ -93,9 +90,11 @@ int search_O(slotO* arreglo, int llave){
             if(arreglo[pos].key == llave){
                 return pos;
             }
-            pos=(index1+p(llave,i));
+            pos=(index1+p(llave,i))%SizeO;
         }
     }
-    printf("no se encontro el producto\n");
     return -1;
+}
+void clearHashO(slotO* arreglo){
+    free(arreglo);
 }

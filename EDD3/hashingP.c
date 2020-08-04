@@ -3,32 +3,34 @@
 #include "hashingP.h"
 
 #define C1 3
-int SizeP=0;
-int Max_size;
+int SizeP;
 
-int get_id_P(producto produc){
-    return produc.codigo_producto;
+int get_id_P(slotP slot){
+    return slot.pro.codigo_producto;
+}
+producto get_pro(slotP slot){
+    return slot.pro;
+}
+char* get_name_P(slotP* slot){
+    return slot->pro.nombre_producto;
 }
 
-char* get_name_P(producto* pro){
-    return pro->nombre_producto;
-}
-
-int get_precio_P(producto produc){
-    return produc.precio;
+int get_precio_P(slotP slot){
+    return slot.pro.precio;
 }
 
 //llenar el arreglo de slots vacios con key=-1 y el flag=0
 slotP* initArrayProduc(int Tam){
-    slotP* arreglo=(slotP*)malloc(sizeof(producto)*Tam);
-    Max_size=Tam;
+    slotP* arreglo;
+    arreglo=(slotP*) malloc(sizeof(slotP)*Tam);
+    SizeP=Tam;
     for(int i=0; i<Tam; i++){
         arreglo[i].key=-1;
     }
     return arreglo;
 }
 
-int h1P(int k, int M){
+int h1P(int k, int m){
     int hashVal;
     if (k == 0){
         return 0;
@@ -36,8 +38,8 @@ int h1P(int k, int M){
     hashVal = (k<<3) ^ k;
     hashVal = (hashVal<<3) ^ k;
     hashVal = (hashVal<<3) ^ k;
-    while (hashVal > M){
-        hashVal = hashVal % M;
+    while (hashVal > m){
+        hashVal = hashVal % m;
     }
     return hashVal;
 }
@@ -53,45 +55,38 @@ int pP(int k, int i){
     return i*h2P(k,i);
 }
 
-void insert_oferta(slotP* arreglo, producto produc){
+void insert_producto(slotP* arreglo, producto produc){
     int index1=h1P(produc.codigo_producto, SizeP);
     int pos=index1;
     if(arreglo[index1].key==-1){
         arreglo[index1].key=produc.codigo_producto;
         arreglo[index1].pro=produc;
-        SizeP++;
-    }
-    else if (arreglo[index1].pro.codigo_producto==produc.codigo_producto)
-    {
-        return;
     }
     else{
-        for(int i=1; arreglo[pos].key != -1; i++){
-            if(arreglo[pos].key == produc.codigo_producto){
-                return;
-            }
-            pos=(index1+pP(produc.codigo_producto,i));
+        for(int i=1; arreglo[pos].key != -1 && pos<SizeP; i++){
+            pos=(index1+pP(produc.codigo_producto,i))%SizeP;
         }
         arreglo[pos].key=produc.codigo_producto;
         arreglo[pos].pro=produc;
-        SizeP++;
     }
 }
 
 int search_P(slotP* arreglo, int llave){
     int index1=h1P(llave, SizeP);
     int pos=index1;
-    if (get_id_P(arreglo[index1].pro)==llave){
+    if (get_id_P(arreglo[index1])==llave){
         return pos;
     }
     else{
-        for(int i=1; arreglo[pos].key != -1; i++){
+        for(int i=1; i<SizeP; i++){
             if(arreglo[pos].key == llave){
                 return pos;
             }
-            pos=(index1+pP(llave,i));
+            pos=(index1+pP(llave,i))%SizeP;
         }
     }
-    printf("no se encontro el producto\n");
     return -1;
+}
+void clearHashP(slotP* arreglo){
+    free(arreglo);
 }

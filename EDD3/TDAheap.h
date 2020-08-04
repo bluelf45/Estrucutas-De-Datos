@@ -28,6 +28,10 @@ void insertarColaP(tcolaP* p, producto2 x);
 
 producto2 removefirstColaP(tcolaP* p);
 
-int buscarHeap(tcolaP* cola, int codigo)
+int buscarHeap(tcolaP* cola, int codigo);
+
+producto2 creacionProduc(int cod, int cont, int cant, char* name);
+
+void sumarElemHeap(tcolaP* heap, int c, int cant, int cont);
 
 #endif
