@@ -6,6 +6,19 @@
 
 #define VACIA -1;
 
+/*****
+* int main
+******
+* El main se encarga de realizar todo lo relacionado con el programa princial. 
+* Primero lee los archivos binarios struct por struct y los añade al hash 
+* uno por uno. 
+******
+* Input:
+* Nada
+******
+* Returns:
+* int, Retorna 0 si el programa se ejecuto correctamente y 1 si ocurrio un error al leer los archivos.
+*****/
 int main(){
     FILE *FileProduc=fopen("productos.dat","rb");
     FILE *FileOfertasf=fopen("ofertas.dat","rb");
@@ -23,8 +36,7 @@ int main(){
 
     producto tempProduc;
     oferta tempOfertas;
-
-    /*Leer el archivo de productos primero y los a�ade al array*/
+    
     i = 0;
     while(i<totalP){
         fread(&tempProduc, sizeof(producto), 1, FileProduc);
@@ -58,7 +70,6 @@ int main(){
         resetCantOHeap(heap);
         fscanf(FileCompras, "%d", &comp);
         for (int j = 0; j < comp; j++){
-            //crear producto2
             int leer;
             fscanf(FileCompras, "%d", &leer);
             int pos = search_P(HashProduc, leer);
