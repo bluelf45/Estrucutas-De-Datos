@@ -26,6 +26,7 @@ void clearColaP(tcolaP* P){
         free(P->array[i]);
     }
     free(P->array);
+    free(P);
 }
 
 producto2* encontrarMax(tcolaP* cola){
@@ -117,11 +118,19 @@ void resetCantOHeap(tcolaP* cola){
 }
 
 producto2* removefirstColaP(tcolaP* p){
-    producto2* j = p->array[1];
+    producto2* j=(producto2*)malloc(sizeof(producto2));
+    j->cantidadO = p->array[1]->cantidadO;
+    j->CantidadPrecio = p->array[1]->CantidadPrecio;
+    j->codigo_producto = p->array[1]->codigo_producto;
+    j->cont = p->array[1]->cont;
+    j->nombre = p->array[1]->nombre;
     producto2* fin = p->array[p->tot + 1];
-    p->array[1] = fin;
+    p->array[1]->cantidadO = fin->cantidadO;
+    p->array[1]->CantidadPrecio = fin->CantidadPrecio;
+    p->array[1]->codigo_producto = fin->codigo_producto;
+    p->array[1]->cont = fin->cont;
+    p->array[1]->nombre = fin->nombre;
     p->tot-- ;
-
     if (p->array[2]->cont > p->array[1]->cont || p->array[3]->cont > p->array[1]->cont){
         hundir(p, 1);
     }

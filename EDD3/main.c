@@ -71,12 +71,12 @@ int main(){
 
     FILE* fp = fopen("ranking.txt", "w");
     for (int i = 0 ; i < rank; i++){
-        producto2* elem = removefirstColaP(heap);// cambiar en adelante mal uso TDA
+        producto2* elem;
+        elem = removefirstColaP(heap);// cambiar en adelante mal uso TDA
         fprintf(fp,"%d %s %d %d\n", elem->codigo_producto, elem->nombre, elem->CantidadPrecio, elem->cont);
+        free(elem);
     }
-
     clearColaP(heap);
-    free(heap);
     fclose(fp);
     clearHashO(HashOfertas);
     clearHashP(HashProduc);
