@@ -3,4 +3,6 @@ Juan Pablo Cassis Oyanadel, 201973519-5, 200, Hice el TDAheap, la parte del main
 					      (En el hashing de productos se llaman h1P, pP y h2P, pero son la misma
 					      funcion) y finalmente arregle varios errores que tuvimos luego de haber
 					      haber completado el programa.
-
+Oscar Hernan Acevedo Bonvin, 201973567-5, 200, Me encargue de HashingP y HashingO, me encangue de buscar y corregir los
+					       Warnings del programa y de corregir los errores de memoria que hubieron
+					       al final.
