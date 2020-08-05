@@ -48,61 +48,33 @@ int main(){
         i++;
     }
     /*Empieza a hacer todo lo relacionado con compras.txt*/
-    FILE *FileCompras=fopen("compras.txt","rb");
+    FILE *FileCompras=fopen("compras.txt","r");
     if(FileCompras==NULL){
         printf("El archivo compras.txt no existe");
         return 1;
     }
-
     tcolaP* heap = initColaP(totalP);
 
-    int ranking, NumClientes, NumProductos, CodProduc, pos, veces, descuento, precio,CostoUnProducto, numDes;
-    int* Codigos, *Cantidad, contador;
-    fscanf(FileCompras,"%d" , &ranking);
-    fscanf(FileCompras, "%d", &NumClientes);
-    for(int i=0; i <= NumClientes; i++){
-        fscanf(FileCompras, "%d", &NumProductos);
-        Codigos=(int*)malloc(sizeof(int)*NumProductos);
-        Cantidad=(int*)malloc(sizeof(int)*NumProductos);
-        contador=0;
-        for(int j=0; j <= NumProductos; j++){
-            fscanf(FileCompras, "%d", &CodProduc);
-            pos=buscar(CodProduc, Codigos, NumProductos);
-            if(pos >= 0){
-                Cantidad[pos]++;
-            }
-            else{
-                Codigos[contador]=CodProduc;
-                Cantidad[contador]=1;
-                contador++;
-            }
+    int rank, clientes;
+
+    fscanf(FileCompras, "%d", &rank);
+    fscanf(FileCompras, "%d", &clientes);
+    for (int i = 0; i < clientes; i++){
+        int comp;
+        resetCantOHeap(heap);
+        fscanf(FileCompras, "%d", &comp);
+        for (int i = 0; i < comp; i++){
+            //crear producto2
+            int leer;
+            fscanf(FileCompras, "%d", &leer);
+            int pos = search_P(HashProduc, leer);
+            producto2 x = creacionProduc(HashProduc, pos);
+            insertarColaP(heap, x, HashOfertas, HashProduc);
         }
-        for(k=0; k<contador; k++){
-            int ofer = search_O(HashOfertas, Codigos[k]);
-            int prod = search_P(HashProduc, Codigos[k]);
-            descuento = 0;
-            if(ofer != -1){
-                numDes = get_cant_desc_O(HashOfertas[ofer]);
-                if(numDes<=Cantidad[k]){
-                    veces = Cantidad[k]/numDes;
-                    descuento = get_descuento_O(HashOfertas[pos]);
-                }
-            }
-            precio = get_precio_P(HashProduc[prod]);
-            CostoUnProducto = Cantidad[k]*precio - (veces*descuento);
-            int c = buscarHeap(heap, Codigos[k]);
-            if (c > 0 ){
-                sumarElemHeap(heap,  c, Cantidad[k], CostoUnProducto);
-            }
-            else{
-                producto2 x=creacionProduc(Codigos[k], Cantidad[k], CostoUnProducto, get_name_P(&HashProduc[prod]));
-                insertarColaP(heap,x);
-            }
-        }
-        free(Codigos);
-        free(Cantidad);
     }
 
+
+    
     //Trabajo en archivo Ranking
 
     FILE* fp = fopen("ranking.txt", "w");

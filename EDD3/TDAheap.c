@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "TDAheap.h"
+#include "hashingO.h"
+#include "hashingP.h"
 
 tcolaP* initColaP(int i){
     tcolaP* cola=(tcolaP*)malloc(sizeof(tcolaP));
@@ -53,13 +55,42 @@ void hundir(tcolaP* cola, int i){
 
 }
 
-void insertarColaP(tcolaP* cola, producto2 x)
-{
+void insertarColaP(tcolaP* cola, producto2 x, slotO *hashO, slotP *hashP){
+    for (int i = 1; i < cola->tot+1; i++){
+        if (cola->array[i].codigo_producto == x.codigo_producto){
+            cola->array[i].cantidadO ++;
+            cola->array[i].CantidadPrecio ++;
+            int pos = search_P(hashP, x.codigo_producto);
+            cola->array[i].cont = hashP[pos].pro.precio * cola->array[i].CantidadPrecio;
+            if (cola->array[i].cont > cola->array[i/2].cont){
+                flotar(cola, i);
+            }
+            int posO = search_O(hashO, x.codigo_producto);
+            if (posO >=0){
+                if (hashO[posO].ofer.cantidad_descuento == cola->array[i].cantidadO){
+                    cola->array[i].cantidadO = 0;
+                    cola->array[i].cont = cola->array[i].cont - hashO[posO].ofer.monto_descuento;
+                    if (cola->array[i].cont < cola->array[i*2].cont || cola->array[i].cont < cola->array[i*2+1].cont){
+                        hundir(cola, i);
+                    }
+                }
+            }
+            return; //retorna para no seguir con el codigo debajo del for
+        }
+    }
+
     cola->array[cola->tot+1] = x ;
-    if (x.cont > cola->array[(cola->tot+1)/2].cont )
-    {
+    cola->array[cola->tot+1].cantidadO = 1;
+    cola->array[cola->tot+1].CantidadPrecio = 1;
+    if (x.cont > cola->array[(cola->tot+1)/2].cont ){
         flotar(cola, (cola->tot + 1));
     }
+}
+
+void resetCantOHeap(tcolaP* cola){
+    for (int i = 0; i < cola->tot+1; i++){
+        cola->array[i].cantidadO = 0;
+    } 
 }
 
 producto2 removefirstColaP(tcolaP* p){
@@ -82,12 +113,13 @@ int buscarHeap(tcolaP* cola, int codigo){
     }
     return 0;
 }
-producto2 creacionProduc(int cod, int cont, int cant, char* name){
+producto2 creacionProduc(int pos, slotP* HT){
     producto2 producto;
-    producto.codigo_producto=cod;
-    producto.cont=cont;
-    producto.cantidad=cant;
-    producto.nombre=name;
+    producto.cantidadO = 0
+    producto.CantidadPrecio = 0;
+    producto.codigo_producto = HT[pos].pro.codigo_producto;
+    producto.cont = HT[pos].pro.precio;
+    producto.nombre = HT[pos].pro.nombre_producto;
     return producto;
 }
 void sumarElemHeap(tcolaP* heap, int c, int cant, int cont){

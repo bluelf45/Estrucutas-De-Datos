@@ -4,7 +4,8 @@
 typedef struct {
     int codigo_producto;
     int cont;
-    int cantidad;
+    int cantidadO;
+    int CantidadPrecio;
     char* nombre;
 } producto2;
 
@@ -24,7 +25,9 @@ void flotar(tcolaP* cola, int i);
 
 void hundir(tcolaP* cola, int i);
 
-void insertarColaP(tcolaP* p, producto2 x);
+void insertarColaP(tcolaP* cola, producto2 x, slotO *hashO, slotP *hashP);
+
+void resetCantOHeap(tcolaP* cola);
 
 producto2 removefirstColaP(tcolaP* p);
 
