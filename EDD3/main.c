@@ -11,7 +11,9 @@
 ******
 * El main se encarga de realizar todo lo relacionado con el programa princial. 
 * Primero lee los archivos binarios struct por struct y los añade al hash 
-* uno por uno. 
+* uno por uno. Lee el archivo compras.txt, añade los productos al heap y se fija
+* cuando es nesesario aplicar los descuentos. La funcion removefirstColaP
+* imprime el heap en orden en el archivo ranking.txt y lo libera.
 ******
 * Input:
 * Nada
@@ -44,7 +46,7 @@ int main(){
         i++;
     }
     i = 0;
-    /*Lo mismo pero al de ofertas*/
+    
     while(i<totalO){
         fread(&tempOfertas, sizeof(oferta),1,FileOfertasf);
         insert_oferta(HashOfertas,tempOfertas);
@@ -52,7 +54,7 @@ int main(){
     }
     fclose(FileProduc);
     fclose(FileOfertasf);
-    /*Empieza a hacer todo lo relacionado con compras.txt*/
+
     FILE *FileCompras=fopen("compras.txt","r");
     if(FileCompras==NULL){
         printf("El archivo compras.txt no existe");
@@ -77,8 +79,6 @@ int main(){
         }
     }
     fclose(FileCompras);
-
-    //Trabajo en archivo Ranking
 
     FILE* fp = fopen("ranking.txt", "w");
     for (int i = 0 ; i < rank; i++){
