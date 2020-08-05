@@ -6,16 +6,6 @@
 
 #define VACIA -1;
 
-int buscar(int codigo, int *arreglo, int tam){
-    int i;
-    for(i=0; i<tam; i++){
-        if(arreglo[i]==codigo){
-            return i;
-        }
-    }
-    return -1;
-}
-
 int main(){
     FILE *FileProduc=fopen("productos.dat","rb");
     FILE *FileOfertasf=fopen("ofertas.dat","rb");
@@ -26,7 +16,7 @@ int main(){
     int totalP, totalO, i;
     fread(&totalP,sizeof(int),1,FileProduc);
     fread(&totalO,sizeof(int),1,FileOfertasf);
-    int TamP=(totalP/0.7)+1; 
+    int TamP=(totalP/0.7)+1;
     int TamO=(totalO/0.7)+1;
     slotP* HashProduc = initArrayProduc(TamP);
     slotO* HashOfertas = initArrayOfer(TamO);
@@ -48,13 +38,16 @@ int main(){
         insert_oferta(HashOfertas,tempOfertas);
         i++;
     }
+    fclose(FileProduc);
+    fclose(FileOfertasf);
     /*Empieza a hacer todo lo relacionado con compras.txt*/
     FILE *FileCompras=fopen("compras.txt","r");
     if(FileCompras==NULL){
         printf("El archivo compras.txt no existe");
         return 1;
     }
-    tcolaP* heap = initColaP(totalP+1);
+    tcolaP* heap =(tcolaP*)malloc(sizeof(tcolaP));
+    initColaP(totalP+1, heap);
 
     int rank, clientes;
 
@@ -69,27 +62,22 @@ int main(){
             int leer;
             fscanf(FileCompras, "%d", &leer);
             int pos = search_P(HashProduc, leer);
-            producto2 x = creacionProduc(pos, HashProduc);
-            insertarColaP(heap, x, HashOfertas, HashProduc);
+            insertarColaP(heap, pos, HashOfertas, HashProduc);
         }
     }
+    fclose(FileCompras);
 
-    
-    
     //Trabajo en archivo Ranking
 
     FILE* fp = fopen("ranking.txt", "w");
-
     for (int i = 0 ; i < rank; i++){
-        producto2 elem = removefirstColaP(heap);// cambiar en adelante mal uso TDA
-        fprintf(fp,"%d %s %d %d\n", elem.codigo_producto, elem.nombre, elem.CantidadPrecio, elem.cont);
+        producto2* elem = removefirstColaP(heap);// cambiar en adelante mal uso TDA
+        fprintf(fp,"%d %s %d %d\n", elem->codigo_producto, elem->nombre, elem->CantidadPrecio, elem->cont);
     }
 
-    fclose(FileProduc);
-    fclose(FileOfertasf);
-    fclose(FileCompras);
-    fclose(fp);
     clearColaP(heap);
+    free(heap);
+    fclose(fp);
     clearHashO(HashOfertas);
     clearHashP(HashProduc);
     return 0;
