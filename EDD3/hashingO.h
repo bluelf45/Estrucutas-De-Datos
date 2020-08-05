@@ -13,58 +13,58 @@ typedef struct{
 }slotO;
 
 /*****
-* TipoFunción NombreFunción
+* slotO* initArrayOfer
 ******
-* Resumen Función
+* inicia la tabla de hashing dejando toads las llaves como -1
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* int Tam : el tamaño de la tabla de hashing
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* slotO*, el arreglo de la tabla de hashing
 *****/
 slotO* initArrayOfer(int Tam);
 
 /*****
-* TipoFunción NombreFunción
+* int get_id_O
 ******
-* Resumen Función
+* devuelve el codigo de producto de la oferta que esta en el slot
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* slotO slot : slot de la tabla de hashing
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* Int, codigo de la oferta
 *****/
 int get_id_O(slotO slot);
 
 /*****
-* TipoFunción NombreFunción
+* int get_cant_desc_O
 ******
-* Resumen Función
+* devuelve la cantidad de prouctos para que funcione la oferta
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* slotO slot : slot de la tabla de hashing
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* int, cantidad de productos de la oferta
 *****/
 int get_cant_desc_O(slotO slot);
 
 /*****
-* TipoFunción NombreFunción
+* int get_descuento_O
 ******
-* Resumen Función
+* devuelve el monto a reducir de la oferta
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* slotO slot : slot de la tabla de hashing
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* int, monto a reducir por la oferta
 *****/
 int get_descuento_O(slotO slot);
 
@@ -111,44 +111,46 @@ int h2(int k, int i);
 int p(int k, int i);
 
 /*****
-* TipoFunción NombreFunción
+* void insert_oferta
 ******
-* Resumen Función
+* inserta un valor en la tabla de hashing de oferta
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* slotO* arreglo: la tabla de hashing;
+* oferta ofer : item a insertar en la tabla
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* void, no retorna nada
 *****/
 void insert_oferta(slotO* arreglo, oferta ofer);
 
 /*****
-* TipoFunción NombreFunción
+* int search_O
 ******
-* Resumen Función
+* busca en la tabla de hashing segun la llave dada
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* slotO* arreglo: tabla de hashing
+* int llave : la llave del objeto a buscar
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* int, devuelve la posicion en el arreglo de hashing
 *****/
 int search_O(slotO* arreglo, int llave);
 
 /*****
-* TipoFunción NombreFunción
+* void clearHashO
 ******
-* Resumen Función
+* limpia la tabla de hashing y libera la memoria de esta
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* slotO* arreglo : tabla de hashing 
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* void, no retorna nada
 *****/
 void clearHashO(slotO* arreglo);
 
