@@ -13,72 +13,72 @@ typedef struct{
 }slotP;
 
 /*****
-* TipoFunción NombreFunción
+* int get_id_P
 ******
-* Resumen Función
+* devuelve el codigo de producto del producto del slot
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* slotP : slot del arreglo de hashing
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* int, codigo producto
 *****/
 int get_id_P(slotP slot);
 
 /*****
-* TipoFunción NombreFunción
+* producto get_pro
 ******
-* Resumen Función
+* devuelve el producto del slotP de la tabla de hashing
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* slotP slot : slotP de la tabla de hashing
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* Tproducto, producto del slotP
 *****/
 producto get_pro(slotP slot);
 
 /*****
-* TipoFunción NombreFunción
+* char* get_name_P
 ******
-* Resumen Función
+* devuelve el nombre del producto que esta en el slot de la tabla de hashing
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* slotP* slot : slotP de la tabla de hashing
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* char*, nombre del producto asignado en el slot
 *****/
 char* get_name_P(slotP *slot);
 
 /*****
-* TipoFunción NombreFunción
+* int get_precio_P
 ******
-* Resumen Función
+* devuelve el precio del producto asignado al slotP
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* slotP slot : slot del arreglo de la tabla de hashing
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* int, precio del producto
 *****/
 int get_precio_P(slotP slot);
 
 /*****
-* TipoFunción NombreFunción
+* initArrayProduc
 ******
-* Resumen Función
+* inicia el arreglo de slotP para la tabla de hashing;
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* int Tam : tamaño para la tabla de hashing
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* slotP* retorna la tabla de hashing
 *****/
 slotP* initArrayProduc(int Tam);
 
@@ -125,44 +125,46 @@ int h2P(int k, int i);
 int pP(int k, int i);
 
 /*****
-* TipoFunción NombreFunción
+* void insert_producto
 ******
-* Resumen Función
+* inserta un producto en la tabla de hashing de arreglo
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* slotP* arreglo : tabla de hashing;
+* producto produc : producto a insertar en la tabla;
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* void, no retorna nada
 *****/
 void insert_producto(slotP* arreglo, producto produc);
 
 /*****
-* TipoFunción NombreFunción
+* int search_P
 ******
-* Resumen Función
+* 
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* slotP* arreglo : tabla de hashing
+* int llave : llave para buscar en la tabla de hashing
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* int, devuelve la posicion en el arreglo de la tabla de hashign
 *****/
 int search_P(slotP* arreglo, int llave);
 
 /*****
-* TipoFunción NombreFunción
+* void clearHashP
 ******
-* Resumen Función
+* limpia la tabla de hash, liberando la memoria de esta
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* slotP* arreglo : arreglo a liberar
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* void, no retorna nada
 *****/
 void clearHashP(slotP* arreglo);
 
