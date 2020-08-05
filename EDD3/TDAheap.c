@@ -117,7 +117,7 @@ void resetCantOHeap(tcolaP* cola){
     }
 }
 
-producto2* removefirstColaP(tcolaP* p){
+producto2* removefirstColaP(tcolaP* p, FILE *fp){
     producto2* j=(producto2*)malloc(sizeof(producto2));
     j->cantidadO = p->array[1]->cantidadO;
     j->CantidadPrecio = p->array[1]->CantidadPrecio;
@@ -131,9 +131,11 @@ producto2* removefirstColaP(tcolaP* p){
     p->array[1]->cont = fin->cont;
     p->array[1]->nombre = fin->nombre;
     p->tot-- ;
+    fin->cont=0;
     if (p->array[2]->cont > p->array[1]->cont || p->array[3]->cont > p->array[1]->cont){
         hundir(p, 1);
     }
+    fprintf(fp,"%d %s %d %d\n", j->codigo_producto, j->nombre, j->CantidadPrecio, j->cont);
     return j;
 }
 
@@ -144,14 +146,4 @@ int buscarHeap(tcolaP* cola, int codigo){
         }
     }
     return 0;
-}
-
-producto2* creacionProduc(int pos, slotP* HT){
-    producto2* producto=(producto2*)malloc(sizeof(producto2));
-    producto->cantidadO = 0;
-    producto->CantidadPrecio = 0;
-    producto->codigo_producto = HT[pos].pro.codigo_producto;
-    producto->cont = HT[pos].pro.precio;
-    producto->nombre = HT[pos].pro.nombre_producto;
-    return producto;
 }

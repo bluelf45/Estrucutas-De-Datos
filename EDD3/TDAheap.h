@@ -31,7 +31,7 @@ void insertarColaP(tcolaP* cola, int pos1, slotO *hashO, slotP *hashP);
 
 void resetCantOHeap(tcolaP* cola);
 
-producto2* removefirstColaP(tcolaP* p);
+producto2* removefirstColaP(tcolaP* p, FILE *fp);
 
 int buscarHeap(tcolaP* cola, int codigo);
 
