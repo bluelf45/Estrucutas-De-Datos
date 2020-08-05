@@ -1,0 +1,6 @@
+Juan Pablo Cassis Oyanadel, 201973519-5, 200, Hice el TDAheap, la parte del main que se encarga de leer el 
+					      archivo compras.txt y las funciones de Hashing, h1, p y h2 
+					      (En el hashing de productos se llaman h1P, pP y h2P, pero son la misma
+					      funcion) y finalmente arregle varios errores que tuvimos luego de haber
+					      haber completado el programa.
+
