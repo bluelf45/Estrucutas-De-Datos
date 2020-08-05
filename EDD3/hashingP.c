@@ -4,22 +4,77 @@
 
 #define C1 3
 int SizeP;
-
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 int get_id_P(slotP slot){
     return slot.pro.codigo_producto;
 }
+
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 producto get_pro(slotP slot){
     return slot.pro;
 }
+
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 char* get_name_P(slotP* slot){
     return slot->pro.nombre_producto;
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 int get_precio_P(slotP slot){
     return slot.pro.precio;
 }
 
-//llenar el arreglo de slots vacios con key=-1 y el flag=0
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 slotP* initArrayProduc(int Tam){
     slotP* arreglo;
     arreglo=(slotP*) malloc(sizeof(slotP)*Tam);
@@ -30,6 +85,17 @@ slotP* initArrayProduc(int Tam){
     return arreglo;
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 int h1P(int k, int m){
     int hashVal;
     if (k == 0){
@@ -44,6 +110,17 @@ int h1P(int k, int m){
     return hashVal;
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 int h2P(int k, int i){
     if (i==0) {
         return 0;
@@ -51,10 +128,32 @@ int h2P(int k, int i){
     return C1*k*k;
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 int pP(int k, int i){
     return i*h2P(k,i);
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 void insert_producto(slotP* arreglo, producto produc){
     int index1=h1P(produc.codigo_producto, SizeP);
     int pos=index1;
