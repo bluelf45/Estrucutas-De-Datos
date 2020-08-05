@@ -1,5 +1,7 @@
 #ifndef TDAHEAP
 #define TDAHEAP
+#include "hashingO.h"
+#include "hashingP.h"
 
 typedef struct {
     int codigo_producto;
@@ -33,7 +35,7 @@ producto2 removefirstColaP(tcolaP* p);
 
 int buscarHeap(tcolaP* cola, int codigo);
 
-producto2 creacionProduc(int cod, int cont, int cant, char* name);
+producto2 creacionProduc(int pos, slotP* HT);
 
 void sumarElemHeap(tcolaP* heap, int c, int cant, int cont);
 

@@ -2,8 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "TDAheap.h"
-#include "hashingO.h"
-#include "hashingP.h"
+
 
 tcolaP* initColaP(int i){
     tcolaP* cola=(tcolaP*)malloc(sizeof(tcolaP));
@@ -20,7 +19,7 @@ void clearColaP(tcolaP* P){
 }
 
 producto2 encontrarMax(tcolaP* cola){
-    return cola->array[0];
+    return cola->array[1];
 }
 
 int sizeColaP(tcolaP* cola){
@@ -29,7 +28,13 @@ int sizeColaP(tcolaP* cola){
 
 void flotar(tcolaP* cola, int i){
     producto2 j;
-    while (i>1 && cola->array[i].cont > cola->array[i/2].cont){
+    if (i==0){
+        return;
+    }
+    if (cola->tot==0){
+        return;
+    }
+    while (i > 1 && cola->array[i].cont > cola->array[i/2].cont){
         j = cola->array[i];
         cola->array[i] = cola->array[i/2];
         cola->array[i/2] = j;
@@ -40,6 +45,12 @@ void flotar(tcolaP* cola, int i){
 void hundir(tcolaP* cola, int i){
     int max;
     producto2 j;
+    if (i==0){
+        return;
+    }
+    if (cola->tot==0){
+        return;
+    }
     while (2*i <= cola->len && (cola->array[i].cont < cola->array[2*i].cont || cola->array[i].cont < cola->array[2*i + 1].cont)){
         if (cola->array[2*i].cont > cola->array[2*i+1].cont){
             max = 2*i;
@@ -82,6 +93,7 @@ void insertarColaP(tcolaP* cola, producto2 x, slotO *hashO, slotP *hashP){
     cola->array[cola->tot+1] = x ;
     cola->array[cola->tot+1].cantidadO = 1;
     cola->array[cola->tot+1].CantidadPrecio = 1;
+    cola->tot++;
     if (x.cont > cola->array[(cola->tot+1)/2].cont ){
         flotar(cola, (cola->tot + 1));
     }
@@ -94,7 +106,7 @@ void resetCantOHeap(tcolaP* cola){
 }
 
 producto2 removefirstColaP(tcolaP* p){
-    producto2 j = encontrarMax(p);
+    producto2 j = p->array[1];
     producto2 fin = p->array[p->tot + 1];
     p->array[1] = fin;
     p->tot-- ;
@@ -115,17 +127,11 @@ int buscarHeap(tcolaP* cola, int codigo){
 }
 producto2 creacionProduc(int pos, slotP* HT){
     producto2 producto;
-    producto.cantidadO = 0
+    producto.cantidadO = 0;
     producto.CantidadPrecio = 0;
     producto.codigo_producto = HT[pos].pro.codigo_producto;
     producto.cont = HT[pos].pro.precio;
     producto.nombre = HT[pos].pro.nombre_producto;
     return producto;
 }
-void sumarElemHeap(tcolaP* heap, int c, int cant, int cont){
-    heap->array[c].cantidad += cant;
-    heap->array[c].cont += cont;
-    if (heap->array[c].cont > heap->array[c/2].cont){
-        flotar(heap, c);
-    }
-}
+

@@ -23,10 +23,11 @@ int main(){
         printf("No existe un archivo\n");
         return 1;
     }
-    int totalP, totalO, i, k;
+    int totalP, totalO, i;
     fread(&totalP,sizeof(int),1,FileProduc);
     fread(&totalO,sizeof(int),1,FileOfertasf);
-    int TamP=(totalP/0.7)+1, TamO=(totalO/0.7)+1;
+    int TamP=(totalP/0.7)+1; 
+    int TamO=(totalO/0.7)+1;
     slotP* HashProduc = initArrayProduc(TamP);
     slotO* HashOfertas = initArrayOfer(TamO);
 
@@ -53,35 +54,35 @@ int main(){
         printf("El archivo compras.txt no existe");
         return 1;
     }
-    tcolaP* heap = initColaP(totalP);
+    tcolaP* heap = initColaP(totalP+1);
 
     int rank, clientes;
 
     fscanf(FileCompras, "%d", &rank);
     fscanf(FileCompras, "%d", &clientes);
-    for (int i = 0; i < clientes; i++){
+    for (int j = 0; j < clientes; j++){
         int comp;
         resetCantOHeap(heap);
         fscanf(FileCompras, "%d", &comp);
-        for (int i = 0; i < comp; i++){
+        for (int j = 0; j < comp; j++){
             //crear producto2
             int leer;
             fscanf(FileCompras, "%d", &leer);
             int pos = search_P(HashProduc, leer);
-            producto2 x = creacionProduc(HashProduc, pos);
+            producto2 x = creacionProduc(pos, HashProduc);
             insertarColaP(heap, x, HashOfertas, HashProduc);
         }
     }
 
-
+    
     
     //Trabajo en archivo Ranking
 
     FILE* fp = fopen("ranking.txt", "w");
 
-    for (int i = 0 ; i < ranking; i++){
+    for (int i = 0 ; i < rank; i++){
         producto2 elem = removefirstColaP(heap);// cambiar en adelante mal uso TDA
-        fprintf(fp,"%d %s %d %d\n", elem.codigo_producto, elem.nombre, elem.cantidad, elem.cont);
+        fprintf(fp,"%d %s %d %d\n", elem.codigo_producto, elem.nombre, elem.CantidadPrecio, elem.cont);
     }
 
     fclose(FileProduc);
