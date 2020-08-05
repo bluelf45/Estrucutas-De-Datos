@@ -7,7 +7,17 @@
 int SizeO;
 
 
-//llenar el arreglo de slots vacios con key=-1 y el flag=0
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 slotO* initArrayOfer(int Tam){
     slotO* arreglo=(slotO*)malloc(sizeof(slotO)*Tam);
     SizeO=Tam;
@@ -16,19 +26,59 @@ slotO* initArrayOfer(int Tam){
     }
     return arreglo;
 }
-
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 int get_id_O(slotO slot){
     return slot.ofer.codigo_producto;
 }
-
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 int get_cant_desc_O(slotO slot){
     return slot.ofer.cantidad_descuento;
 }
-
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 int get_descuento_O(slotO slot){
     return slot.ofer.monto_descuento;
 }
-
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 int h1(int k, int M){
     int hashVal;
     if (k == 0){
@@ -42,7 +92,17 @@ int h1(int k, int M){
     }
     return hashVal;
 }
-
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 int h2(int k, int i){
     if (i==0){
         return 0;
@@ -50,11 +110,31 @@ int h2(int k, int i){
     int final=k*C1;
     return final*k;
 }
-
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 int p(int k, int i){
     return i*h2(k,i);
 }
-
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 void insert_oferta(slotO* arreglo, oferta ofer){
     int index1=h1(ofer.codigo_producto, SizeO);
     int pos=index1;
@@ -78,7 +158,17 @@ void insert_oferta(slotO* arreglo, oferta ofer){
     }
 }
 
-
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 int search_O(slotO* arreglo, int llave){
     int index1=h1(llave, SizeO);
     if (arreglo[index1].ofer.codigo_producto==llave){
@@ -95,6 +185,17 @@ int search_O(slotO* arreglo, int llave){
     }
     return -1;
 }
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 void clearHashO(slotO* arreglo){
     free(arreglo);
 }
