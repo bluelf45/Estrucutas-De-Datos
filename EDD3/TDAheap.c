@@ -3,7 +3,17 @@
 #include <stdlib.h>
 #include "TDAheap.h"
 
-
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 tcolaP* initColaP(int i, tcolaP* cola){
     cola->array = (producto2**)malloc(sizeof(producto2*)*(i+1));
     cola->len = i+1;
@@ -20,6 +30,17 @@ tcolaP* initColaP(int i, tcolaP* cola){
     return cola;
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 void clearColaP(tcolaP* P){
     free(P->array[0]);
     for(int i=1; i < P->len; i++){
@@ -29,6 +50,17 @@ void clearColaP(tcolaP* P){
     free(P);
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 producto2* encontrarMax(tcolaP* cola){
     return cola->array[1];
 }
@@ -37,6 +69,17 @@ int sizeColaP(tcolaP* cola){
     return cola->len;
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 void flotar(tcolaP* cola, int i){
     producto2* j;
     if (i==0){
@@ -53,6 +96,17 @@ void flotar(tcolaP* cola, int i){
     }
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 void hundir(tcolaP* cola, int i){
     int max;
     producto2* j;
@@ -76,6 +130,17 @@ void hundir(tcolaP* cola, int i){
     }
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 void insertarColaP(tcolaP* cola, int pos1, slotO *hashO, slotP *hashP){
     for (int i = 1; i < cola->tot+1; i++){
         if (cola->array[i]->codigo_producto == hashP[pos1].pro.codigo_producto){
@@ -111,12 +176,34 @@ void insertarColaP(tcolaP* cola, int pos1, slotO *hashO, slotP *hashP){
     }
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 void resetCantOHeap(tcolaP* cola){
     for (int i = 0; i < cola->tot+1; i++){
         cola->array[i]->cantidadO = 0;
     }
 }
 
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 producto2* removefirstColaP(tcolaP* p, FILE *fp){
     producto2* j=(producto2*)malloc(sizeof(producto2));
     j->cantidadO = p->array[1]->cantidadO;
@@ -138,7 +225,17 @@ producto2* removefirstColaP(tcolaP* p, FILE *fp){
     fprintf(fp,"%d %s %d %d\n", j->codigo_producto, j->nombre, j->CantidadPrecio, j->cont);
     return j;
 }
-
+/*****
+* TipoFunción NombreFunción
+******
+* Resumen Función
+******
+* Input:
+* tipoParámetro NombreParámetro : Descripción Parámetro
+******
+* Returns:
+* TipoRetorno, Descripción retorno
+*****/
 int buscarHeap(tcolaP* cola, int codigo){
     for(int c = 1; c < cola->len; c++){
         if (cola->array[c]->codigo_producto == codigo){
