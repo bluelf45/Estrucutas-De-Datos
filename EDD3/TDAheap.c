@@ -30,10 +30,6 @@ void clearColaP(tcolaP* P){
 }
 
 
-producto2* encontrarMax(tcolaP* cola){
-    return cola->array[1];
-}
-
 int sizeColaP(tcolaP* cola){
     return cola->len;
 }
@@ -144,11 +140,3 @@ producto2* removefirstColaP(tcolaP* p, FILE *fp){
     return j;
 }
 
-int buscarHeap(tcolaP* cola, int codigo){
-    for(int c = 1; c < cola->len; c++){
-        if (cola->array[c]->codigo_producto == codigo){
-            return c;
-        }
-    }
-    return 0;
-}

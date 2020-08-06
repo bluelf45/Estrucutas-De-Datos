@@ -69,44 +69,47 @@ int get_cant_desc_O(slotO slot);
 int get_descuento_O(slotO slot);
 
 /*****
-* TipoFunción NombreFunción
+* int h1
 ******
-* Resumen Función
+* Primera funcion de hashing, usa operadores de bits (<< y ^) para modificar el valor 
+  del numero ingresado.  
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
-* .......
+* int k : numero al cual se le hara el hash 
+* int M : numero total de "slots" en la tabla de hash, numero por el cual se hace modulo.
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* int, indice de donde se insertara el valor (HashVal).
 *****/
 int h1(int k, int M);
 
 /*****
-* TipoFunción NombreFunción
+* int h2
 ******
-* Resumen Función
+* Segunda funcion de hashing, utilizada en caso de que el indice retornado por h1 ya este
+  siendo ocupado por otro elemento.
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
-* .......
+* int k : numero al cual se le aplica la funcion de hash
+* int i : veces que se ha realizado la funcion con tal de encontrar un slot vacio.
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* int, retorna el indice donde insertar el valor.
 *****/
 int h2(int k, int i);
 
 /*****
-* TipoFunción NombreFunción
+* int p
 ******
-* Resumen Función
+* funcion que se encarga de utilizar a h2 las veces necesarias para hacer el hashing 
+  en casos donde h1 no encuentra un slot vacio
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
-* .......
+* int k : valor al cual se le hace el hash
+* int i : veces que se ha llamado a la funcion p
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* int, devuelve el valor obtenido para el hash.
 *****/
 int p(int k, int i);
 

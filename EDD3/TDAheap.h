@@ -18,157 +18,111 @@ typedef struct {
 } tcolaP;
 
 /*****
-* TipoFunción NombreFunción
+* tcolaP* initColaP
 ******
-* Resumen Función
+* Se encarga de inicializar la cola de prioridad que contiene al heap.
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
-* .......
+* int i : Tamaño deseado para el heap
+* tcolaP* cola : heap no inicializado
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* tcolaP*, heap con la memoria alojada y valores incializados
 *****/
 tcolaP* initColaP(int i, tcolaP* cola);
 
 /*****
-* TipoFunción NombreFunción
+* void clearColaP
 ******
-* Resumen Función
+* Se libera la memoria ocupada por la cola ingresada
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
-* .......
+* tcolaP* P : heap la cual queremos liberar
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* void, no retorna nada
 *****/
 void clearColaP(tcolaP* P);
 
 /*****
-* TipoFunción NombreFunción
+* void flotar
 ******
-* Resumen Función
-******
-* Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
-* .......
-******
-* Returns:
-* TipoRetorno, Descripción retorno
-*****/
-producto2* encontrarMax(tcolaP* cola);
-
-/*****
-* TipoFunción NombreFunción
-******
-* Resumen Función
+* Funcion la cual se encarga de hacer "flotar" un elemento dependiendo
+  de si su variable "cont" es mayor a la de su "padre" en el heap.
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
-* .......
+* tcolaP* cola : heap donde se efectuaran las operaciones
+* int i : posicion en el heap del elementro el cual se quiere flotar
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* void, no retorna nada
 *****/
 void flotar(tcolaP* cola, int i);
 
 /*****
-* TipoFunción NombreFunción
+* void hundir
 ******
-* Resumen Función
+* Funcion la cual va a "hundir" el elemento seleccionado la cantidad de
+  veces necesaria.
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
-* .......
+* tcolaP* cola : heap donde se efectuaran las operaciones
+* int i : posicion en el heap del elementro el cual se quiere hundir
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* void, no retorna nada
 *****/
 void hundir(tcolaP* cola, int i);
 
 /*****
-* TipoFunción NombreFunción
+* void insertarColaP
 ******
-* Resumen Función
+* funcion encargada de insertar un elemento al heap, y ademas, en
+  caso de que el elemento ya este en el heap, le agregara la cantidad necesaria
+  a la cantidad de veces comprado de ese item, flotando el elemento
+  en caso de ser necesario, y en caso de que se pueda efectuar un desceunto, se
+  hace el descuento y se hunde el elemento de ser necesario.
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
-* .......
+* tcolaP* cola : heap en donde se insertara el elemento
+* int pos1 : posicion en la tabla de hashing donde 
+             esta el elemento que queremos insertar
+* slotO *hashO : tabla de hashing de ofertas
+* slotP *hashP : tabla de hashing de productos
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* void, no retorna nada
 *****/
 void insertarColaP(tcolaP* cola, int pos1, slotO *hashO, slotP *hashP);
 
 /*****
-* TipoFunción NombreFunción
+* void resetCantOHeap
 ******
-* Resumen Función
+* Se encarga de devolver a 0 todas las variables cantO en el heap cuando hay
+  un cambio de cliente
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
-* .......
+* tcolaP* cola : heap en el cual se efectua el "reset" de las variables cantO
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* void, no retorna nada
 *****/
 void resetCantOHeap(tcolaP* cola);
 
 /*****
-* TipoFunción NombreFunción
+* producto2* removefirstColaP
 ******
-* Resumen Función
+* Se encarga de remover el primer elemento del max-heap para escribirlo en el
+  formato pedido en el archivo de ranking
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
-* .......
+* tcolaP* p : Heap donde removeremos el primer elemento
+* FILE *fp : Archivo donde se escribe los datos del elemento removido
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* producto2*, elemento removido.
 *****/
 producto2* removefirstColaP(tcolaP* p, FILE *fp);
 
-/*****
-* TipoFunción NombreFunción
-******
-* Resumen Función
-******
-* Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
-* .......
-******
-* Returns:
-* TipoRetorno, Descripción retorno
-*****/
-int buscarHeap(tcolaP* cola, int codigo);
-
-/*****
-* TipoFunción NombreFunción
-******
-* Resumen Función
-******
-* Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
-* .......
-******
-* Returns:
-* TipoRetorno, Descripción retorno
-*****/
-producto2* creacionProduc(int pos, slotP* HT);
-
-/*****
-* TipoFunción NombreFunción
-******
-* Resumen Función
-******
-* Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
-* .......
-******
-* Returns:
-* TipoRetorno, Descripción retorno
-*****/
-void sumarElemHeap(tcolaP* heap, int c, int cant, int cont);
 
 #endif
